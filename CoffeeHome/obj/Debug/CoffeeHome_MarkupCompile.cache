@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Code Visual 2013\CoffeeManager\CoffeeHome\obj\Debug\
+E:\Code Visual 2013\CoffeeHome\CoffeeHome\obj\Debug\
 CoffeeHome
 none
 false
 DEBUG;TRACE
-E:\Code Visual 2013\CoffeeManager\CoffeeHome\App.xaml
-2-259935290
+E:\Code Visual 2013\CoffeeHome\CoffeeHome\App.xaml
+4814483592
 
-6-1426549404
-15-1306194113
-HomeWindow.xaml;MainWindow.xaml;
+11-1980151799
+15984834145
+HomeWindow.xaml;MainWindow.xaml;TemplateView\DrinkAndFoodTemplate.xaml;TemplateView\DrinkTypeTemplate.xaml;
 
 False
 

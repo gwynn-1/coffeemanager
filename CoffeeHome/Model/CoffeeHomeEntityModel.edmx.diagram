@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e256cd539e81451fb3dacb54406457a3" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="CoffeeHomeModel.Bill_details" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.Bill_Online" Width="1.5" PointX="6.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.Bill_Online_Detail" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.Bill" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.Customer" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.Drink_type" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.DrinkAndDessert" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.Staff" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.sysdiagram" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeHomeModel.Table" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="CoffeeHomeModel.FK_Bill_details_Bills" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeHomeModel.FK_Bill_details_DrinkAndDessert" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeHomeModel.FK_Bill_Online_Detail_Bill_Online" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeHomeModel.FK_Bill_Online_Detail_DrinkAndDessert" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeHomeModel.FK_Bills_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeHomeModel.FK_Bills_Tables" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeHomeModel.FK_DrinkAndDessert_Drink_type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
