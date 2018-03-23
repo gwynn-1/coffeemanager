@@ -96,6 +96,18 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <ControlTemplate x:Key="textBoxErrorTemplate">
+                <DockPanel>
+                    <Grid DockPanel.Dock="Right" Width="16" Height="16" VerticalAlignment="Center" Margin="3 0 0 0">
+                        <Ellipse Width="16" Height="16" Fill="Red" ToolTip="{Binding ElementName=AdornedElementPlaceholder, Path=AdornedElement.(Validation.Errors).CurrentItem.ErrorContent}"/>
+                        <Ellipse Width="3" Height="8" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 2 0 0" Fill="White"/>
+                        <Ellipse Width="2" Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 2" Fill="White"/>
+                    </Grid>
+                    <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
+                        <AdornedElementPlaceholder x:Name="AdornedElementPlaceholder"/>
+                    </Border>
+                </DockPanel>
+            </ControlTemplate>
         </ResourceDictionary>
         
     </Application.Resources>

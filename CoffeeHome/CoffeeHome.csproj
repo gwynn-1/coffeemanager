@@ -45,11 +45,17 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.953, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +74,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\LoginConverter.cs" />
+    <Compile Include="Converter\SignupConverter.cs" />
     <Compile Include="Model\Bill.cs">
       <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
     </Compile>
@@ -107,21 +115,31 @@
     <Compile Include="Model\Staff.cs">
       <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\StaffModel.cs" />
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Table.cs">
       <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\DrinkAndFoodTemplate.xaml.cs">
-      <DependentUpon>DrinkAndFoodTemplate.xaml</DependentUpon>
+    <Compile Include="SignupWindow.xaml.cs">
+      <DependentUpon>SignupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\DrinkTypeTemplate.xaml.cs">
-      <DependentUpon>DrinkTypeTemplate.xaml</DependentUpon>
+    <Compile Include="TemplateView\AdminTemplate.xaml.cs">
+      <DependentUpon>AdminTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validation\ConfirmPasswordValidate.cs" />
+    <Compile Include="Validation\EmailValidation.cs" />
+    <Compile Include="Validation\MaxMinValidation.cs" />
+    <Compile Include="Validation\NumericValidation.cs" />
+    <Compile Include="Validation\RequiredValidation.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ItemField.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MD5Provider.cs" />
+    <Compile Include="ViewModel\PasswordHelper.cs" />
+    <Compile Include="ViewModel\SignupViewModel.cs" />
     <Page Include="HomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,11 +159,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TemplateView\DrinkAndFoodTemplate.xaml">
+    <Page Include="SignupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\DrinkTypeTemplate.xaml">
+    <Page Include="TemplateView\AdminTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,6 +241,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Images\left-arrow.png" />
     <Content Include="Model\CoffeeHomeEntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CoffeeHomeEntityModel.Context.cs</LastGenOutput>

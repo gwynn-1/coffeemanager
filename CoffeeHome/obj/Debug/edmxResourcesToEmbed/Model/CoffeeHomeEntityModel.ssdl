@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CoffeeHomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bill_details">
+    <Key>
+      <PropertyRef Name="id_bill" />
+      <PropertyRef Name="id_food" />
+    </Key>
+    <Property Name="id_bill" Type="int" Nullable="false" />
+    <Property Name="id_food" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="price" Type="int" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Bill_Online">
+    <Key>
+      <PropertyRef Name="id_bill_online" />
+    </Key>
+    <Property Name="name_customer" Type="nvarchar" MaxLength="255" />
+    <Property Name="address" Type="nvarchar" MaxLength="500" />
+    <Property Name="total_price" Type="int" />
+    <Property Name="sdt" Type="int" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="id_bill_online" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bill_Online_Detail">
+    <Key>
+      <PropertyRef Name="id_bill" />
+      <PropertyRef Name="id_drink" />
+    </Key>
+    <Property Name="id_bill" Type="int" Nullable="false" />
+    <Property Name="id_drink" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="created_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Bills">
+    <Key>
+      <PropertyRef Name="id_bill" />
+    </Key>
+    <Property Name="id_customer" Type="int" />
+    <Property Name="id_table" Type="int" Nullable="false" />
+    <Property Name="total_price" Type="int" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="id_bill" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id_customer" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="points" Type="int" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="sdt" Type="int" />
+    <Property Name="id_customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="avatar" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Drink_type">
+    <Key>
+      <PropertyRef Name="id_type" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="id_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DrinkAndDessert">
+    <Key>
+      <PropertyRef Name="id_drink" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="description" Type="nvarchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="id_drink" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_type" Type="int" />
+    <Property Name="image" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="id_staff" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="username" Type="nvarchar" MaxLength="255" />
+    <Property Name="password" Type="nvarchar" MaxLength="255" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="sdt" Type="int" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="id_staff" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="level" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tables">
+    <Key>
+      <PropertyRef Name="id_table" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="status" Type="tinyint" Nullable="false" />
+    <Property Name="id_table" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Bill_details_Bills">
+    <End Role="Bills" Type="Self.Bills" Multiplicity="1" />
+    <End Role="Bill_details" Type="Self.Bill_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bills">
+        <PropertyRef Name="id_bill" />
+      </Principal>
+      <Dependent Role="Bill_details">
+        <PropertyRef Name="id_bill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_details_DrinkAndDessert">
+    <End Role="DrinkAndDessert" Type="Self.DrinkAndDessert" Multiplicity="1" />
+    <End Role="Bill_details" Type="Self.Bill_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DrinkAndDessert">
+        <PropertyRef Name="id_drink" />
+      </Principal>
+      <Dependent Role="Bill_details">
+        <PropertyRef Name="id_food" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_Online_Detail_Bill_Online">
+    <End Role="Bill_Online" Type="Self.Bill_Online" Multiplicity="1" />
+    <End Role="Bill_Online_Detail" Type="Self.Bill_Online_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill_Online">
+        <PropertyRef Name="id_bill_online" />
+      </Principal>
+      <Dependent Role="Bill_Online_Detail">
+        <PropertyRef Name="id_bill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_Online_Detail_DrinkAndDessert">
+    <End Role="DrinkAndDessert" Type="Self.DrinkAndDessert" Multiplicity="1" />
+    <End Role="Bill_Online_Detail" Type="Self.Bill_Online_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DrinkAndDessert">
+        <PropertyRef Name="id_drink" />
+      </Principal>
+      <Dependent Role="Bill_Online_Detail">
+        <PropertyRef Name="id_drink" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bills_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Bills" Type="Self.Bills" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id_customer" />
+      </Principal>
+      <Dependent Role="Bills">
+        <PropertyRef Name="id_customer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bills_Tables">
+    <End Role="Tables" Type="Self.Tables" Multiplicity="1" />
+    <End Role="Bills" Type="Self.Bills" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tables">
+        <PropertyRef Name="id_table" />
+      </Principal>
+      <Dependent Role="Bills">
+        <PropertyRef Name="id_table" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DrinkAndDessert_Drink_type">
+    <End Role="Drink_type" Type="Self.Drink_type" Multiplicity="0..1" />
+    <End Role="DrinkAndDessert" Type="Self.DrinkAndDessert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drink_type">
+        <PropertyRef Name="id_type" />
+      </Principal>
+      <Dependent Role="DrinkAndDessert">
+        <PropertyRef Name="id_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CoffeeHomeModelStoreContainer">
+    <EntitySet Name="Bill_details" EntityType="Self.Bill_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bill_Online" EntityType="Self.Bill_Online" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bill_Online_Detail" EntityType="Self.Bill_Online_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Drink_type" EntityType="Self.Drink_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DrinkAndDessert" EntityType="Self.DrinkAndDessert" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tables" EntityType="Self.Tables" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bill_details_Bills" Association="Self.FK_Bill_details_Bills">
+      <End Role="Bills" EntitySet="Bills" />
+      <End Role="Bill_details" EntitySet="Bill_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_details_DrinkAndDessert" Association="Self.FK_Bill_details_DrinkAndDessert">
+      <End Role="DrinkAndDessert" EntitySet="DrinkAndDessert" />
+      <End Role="Bill_details" EntitySet="Bill_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_Online_Detail_Bill_Online" Association="Self.FK_Bill_Online_Detail_Bill_Online">
+      <End Role="Bill_Online" EntitySet="Bill_Online" />
+      <End Role="Bill_Online_Detail" EntitySet="Bill_Online_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_Online_Detail_DrinkAndDessert" Association="Self.FK_Bill_Online_Detail_DrinkAndDessert">
+      <End Role="DrinkAndDessert" EntitySet="DrinkAndDessert" />
+      <End Role="Bill_Online_Detail" EntitySet="Bill_Online_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bills_Customer" Association="Self.FK_Bills_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Bills" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bills_Tables" Association="Self.FK_Bills_Tables">
+      <End Role="Tables" EntitySet="Tables" />
+      <End Role="Bills" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DrinkAndDessert_Drink_type" Association="Self.FK_DrinkAndDessert_Drink_type">
+      <End Role="Drink_type" EntitySet="Drink_type" />
+      <End Role="DrinkAndDessert" EntitySet="DrinkAndDessert" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

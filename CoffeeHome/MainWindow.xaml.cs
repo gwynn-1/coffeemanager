@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CoffeeHome.ViewModel;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace CoffeeHome
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
 
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -32,10 +35,15 @@ namespace CoffeeHome
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            HomeWindow home = new HomeWindow();
-            home.Show();
-            Application.Current.MainWindow = home;
-            this.Close();
+            //HomeWindow home = new HomeWindow();
+            //home.Show();
+            //Application.Current.MainWindow = home;
+            //this.Close();
+        }
+
+        private void SnackbarMessage_ActionClick(object sender, RoutedEventArgs e)
+        {
+            SnackbarLoginFail.IsActive = false;
         }
     }
 }

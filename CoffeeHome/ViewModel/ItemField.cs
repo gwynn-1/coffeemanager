@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace CoffeeHome.ViewModel
 {
-    class ItemField: INotifyPropertyChanged
+    public class ItemField: INotifyPropertyChanged
     {
         private string _name;
         private object _content;

@@ -1,0 +1,247 @@
+﻿<Window x:Class="CoffeeHome.SignupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CoffeeHome"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:signupviewmodel="clr-namespace:CoffeeHome.ViewModel"
+        xmlns:validation="clr-namespace:CoffeeHome.Validation"
+        xmlns:converter="clr-namespace:CoffeeHome.Converter"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="Sign Up"
+        Height="650" Width="500"
+        MinHeight="650" MinWidth="500"
+        ResizeMode="NoResize"
+        MaxWidth="{x:Static SystemParameters.MaximizedPrimaryScreenWidth}"
+        MaxHeight="{x:Static SystemParameters.MaximizedPrimaryScreenHeight}"
+        Style="{StaticResource CoffeeWindowStyle}" x:Name="signupWindow">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="CloseCommandHandler"/>
+    </Window.CommandBindings>
+    <Window.Resources>
+        <ResourceDictionary>
+            <signupviewmodel:SignupViewModel x:Key="signupviewmodel"></signupviewmodel:SignupViewModel>
+            <converter:SignupConverter x:Key="signupConverter"></converter:SignupConverter>
+            <Style x:Key="CustomMaterialDesignRaisedDarkButton" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="{x:Type Button}">
+                <Setter Property="IsEnabled" Value="false" />
+                <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding ElementName=txbName, Path=(Validation.HasError)}" Value="false" />
+                            <Condition Binding="{Binding ElementName=txbUsername, Path=(Validation.HasError)}" Value="false" />
+                            <Condition Binding="{Binding ElementName=txbpPassword, Path=(Validation.HasError)}" Value="false" />
+                            <Condition Binding="{Binding ElementName=txbpRepassword, Path=(Validation.HasError)}" Value="false" />
+                            <Condition Binding="{Binding ElementName=txbEmail, Path=(Validation.HasError)}" Value="false" />
+                            <Condition Binding="{Binding ElementName=txbSDT, Path=(Validation.HasError)}" Value="false" />
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="true" />
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone Grid.Row="0" 
+                                  Mode="PrimaryDark"
+                                  Padding="16"
+                                  CornerRadius="3"
+                                  Margin="2">
+            <Grid>
+                <Button HorizontalAlignment="Left" Padding="0" x:Name="BackButton" Click="BackButton_Click" BorderThickness="0" Width="24" Height="24" Background="Transparent">
+                    <Image Source="Images/left-arrow.png" Width="24" Height="24" HorizontalAlignment="Center"></Image>
+                </Button>
+                <TextBlock VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="46 0 0 0"
+                               FontWeight="Bold"
+                               FontSize="20"
+                               Foreground="#FF2B2B2B"
+                               FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto">
+                            Sign up - Admin
+                </TextBlock>
+            </Grid>
+        </materialDesign:ColorZone>
+        <StackPanel Grid.Row="1" Background="WhiteSmoke">
+            <AdornerDecorator>
+                <TextBox Margin="100,20,100,0"
+                     x:Name="txbName"
+                     FontSize="14"
+                     materialDesign:ValidationAssist.Suppress="False"
+                     materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                     FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                     materialDesign:HintAssist.Hint="Tên"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <TextBox.Text>
+                        <Binding Path="Staff.Name" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredValidation PropertyName="Tên" ValidatesOnTargetUpdated="True"/>
+                                <validation:MaxMinValidation PropertyName="Tên" ValidatesOnTargetUpdated="True" Max="100" Min="5"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </AdornerDecorator>
+            <AdornerDecorator>
+                <TextBox Margin="100,20,100,0"
+                     x:Name="txbUsername"
+                     FontSize="14"
+                     FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                     materialDesign:ValidationAssist.Suppress="False"
+                     materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                     materialDesign:HintAssist.Hint="Tên Đăng nhập"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <TextBox.Text>
+                        <Binding Path="Staff.Username" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredValidation PropertyName="Tên đăng nhập" ValidatesOnTargetUpdated="True"/>
+                                <validation:MaxMinValidation PropertyName="Tên đăng nhập" ValidatesOnTargetUpdated="True" Max="100" Min="5"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </AdornerDecorator>
+            <AdornerDecorator>
+                <PasswordBox Margin="100, 20 , 100, 0"
+                     x:Name="txbpPassword"
+                     FontSize="14"
+                     FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                     signupviewmodel:PasswordHelper.Attach="True"
+                     materialDesign:ValidationAssist.Suppress="False"
+                     materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                     materialDesign:HintAssist.Hint="Mật khẩu"
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                    <signupviewmodel:PasswordHelper.Password>
+                        <Binding Path="Staff.Password" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource"
+                             ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredValidation PropertyName="Mật khẩu" ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </signupviewmodel:PasswordHelper.Password>
+                </PasswordBox>
+            </AdornerDecorator>
+            <AdornerDecorator>
+                <PasswordBox Margin="100, 20 , 100, 0"
+                     x:Name="txbpRepassword"
+                     FontSize="14"
+                     FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                     materialDesign:ValidationAssist.Suppress="False"
+                     materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                     signupviewmodel:PasswordHelper.Attach="True"
+                     materialDesign:HintAssist.Hint="Nhập lại mật khẩu"
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                    <PasswordBox.Resources>
+                        <validation:BindingProxy x:Key="TargetProxy" Data="{Binding Path=(signupviewmodel:PasswordHelper.Password), ElementName=txbpPassword, UpdateSourceTrigger=PropertyChanged}"/>
+                    </PasswordBox.Resources>
+                    <signupviewmodel:PasswordHelper.Password>
+                        <Binding Path="Staff.Repassword" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource"
+                             ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:ConfirmPasswordValidate>
+                                    <validation:ConfirmPasswordValidate.Repassword>
+                                        <validation:Repassword Password="{Binding Data,Source={StaticResource TargetProxy}}"/>
+                                    </validation:ConfirmPasswordValidate.Repassword>
+                                </validation:ConfirmPasswordValidate>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </signupviewmodel:PasswordHelper.Password>
+                </PasswordBox>
+            </AdornerDecorator>
+            <AdornerDecorator>
+                <TextBox Margin="100,20,100,0"
+                     x:Name="txbEmail"
+                     FontSize="14"
+                     FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                     materialDesign:HintAssist.Hint="Email"
+                     materialDesign:ValidationAssist.Suppress="False"
+                     materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <TextBox.Text>
+                        <Binding Path="Staff.Email" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredValidation PropertyName="Email" ValidatesOnTargetUpdated="True"/>
+                                <validation:EmailValidation PropertyName="Email" ValidatesOnTargetUpdated="True"/>
+                                <validation:MaxMinValidation PropertyName="Email" Max="50" Min="10"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </AdornerDecorator>
+            <AdornerDecorator>
+                <TextBox Margin="100,20,100,0"
+                     x:Name="txbSDT"
+                     FontSize="14"
+                     FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                     materialDesign:HintAssist.Hint="Số điện thoại"
+                     materialDesign:ValidationAssist.Suppress="False"
+                     materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <TextBox.Text>
+                        <Binding Path="Staff.Sdt" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredValidation PropertyName="Số điện thoại" ValidatesOnTargetUpdated="True"/>
+                                <validation:MaxMinValidation PropertyName="Số điện thoại" ValidatesOnTargetUpdated="True" Max="12" Min="5"></validation:MaxMinValidation>
+                                <validation:NumericValidation PropertyName="Số điện thoại" ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </AdornerDecorator>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="100, 50 , 100, 0">
+                <Button Width="120"
+                        x:Name="btnSignup"
+                        Margin="0,0,30,0"
+                        IsDefault="True"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Background="#EA8024"
+                        FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                        Style="{StaticResource CustomMaterialDesignRaisedDarkButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                        Click="btnSignup_Click"
+                        Content="Đăng kí">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding signupCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource signupConverter}">
+                                        <MultiBinding.Bindings>
+                                            <Binding ElementName="txbName" Path="Text"/>
+                                            <Binding ElementName="txbUsername" Path="Text"/>
+                                            <Binding ElementName="txbpPassword" Path="(signupviewmodel:PasswordHelper.Password)"/>
+                                            <Binding ElementName="txbpRepassword" Path="(signupviewmodel:PasswordHelper.Password)"/>
+                                            <Binding ElementName="txbEmail" Path="Text"/>
+                                            <Binding ElementName="txbSDT" Path="Text"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                </Button>
+                <Button Width="120"
+                        Name="btnForgotPass"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Background="#EA8024"
+                        FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    Thoát
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
