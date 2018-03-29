@@ -79,7 +79,7 @@
                      materialDesign:HintAssist.Hint="Tên"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <TextBox.Text>
-                        <Binding Path="Staff.Name" UpdateSourceTrigger="PropertyChanged"
+                        <Binding Path="Staff.Name" UpdateSourceTrigger="PropertyChanged" Delay="700"
                              ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <validation:RequiredValidation PropertyName="Tên" ValidatesOnTargetUpdated="True"/>
@@ -99,11 +99,12 @@
                      materialDesign:HintAssist.Hint="Tên Đăng nhập"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <TextBox.Text>
-                        <Binding Path="Staff.Username" UpdateSourceTrigger="PropertyChanged"
+                        <Binding Path="Staff.Username" UpdateSourceTrigger="PropertyChanged" Delay="700"
                              ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <validation:RequiredValidation PropertyName="Tên đăng nhập" ValidatesOnTargetUpdated="True"/>
                                 <validation:MaxMinValidation PropertyName="Tên đăng nhập" ValidatesOnTargetUpdated="True" Max="100" Min="5"/>
+                                <validation:UniqueValidation PropertyName="Tên đăng nhập" ValidatesOnTargetUpdated="True" Table="Staff" Field="username"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -120,10 +121,11 @@
                      materialDesign:HintAssist.Hint="Mật khẩu"
                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
                     <signupviewmodel:PasswordHelper.Password>
-                        <Binding Path="Staff.Password" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource"
+                        <Binding Path="Staff.Password" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Delay="700"
                              ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <validation:RequiredValidation PropertyName="Mật khẩu" ValidatesOnTargetUpdated="True"/>
+                                <validation:PasswordValidation PropertyName="Mật khẩu" ValidatesOnTargetUpdated="True"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </signupviewmodel:PasswordHelper.Password>
@@ -143,7 +145,7 @@
                         <validation:BindingProxy x:Key="TargetProxy" Data="{Binding Path=(signupviewmodel:PasswordHelper.Password), ElementName=txbpPassword, UpdateSourceTrigger=PropertyChanged}"/>
                     </PasswordBox.Resources>
                     <signupviewmodel:PasswordHelper.Password>
-                        <Binding Path="Staff.Repassword" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource"
+                        <Binding Path="Staff.Repassword" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Delay="700"
                              ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <validation:ConfirmPasswordValidate>
@@ -166,12 +168,13 @@
                      materialDesign:ValidationAssist.OnlyShowOnFocus="True"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <TextBox.Text>
-                        <Binding Path="Staff.Email" UpdateSourceTrigger="PropertyChanged"
+                        <Binding Path="Staff.Email" UpdateSourceTrigger="PropertyChanged" Delay="700"
                              ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <validation:RequiredValidation PropertyName="Email" ValidatesOnTargetUpdated="True"/>
                                 <validation:EmailValidation PropertyName="Email" ValidatesOnTargetUpdated="True"/>
-                                <validation:MaxMinValidation PropertyName="Email" Max="50" Min="10"/>
+                                <validation:MaxMinValidation PropertyName="Email" ValidatesOnTargetUpdated="True" Max="50" Min="10"/>
+                                <validation:UniqueValidation PropertyName="Email" ValidatesOnTargetUpdated="True" Field="email" Table="Staff"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -187,7 +190,7 @@
                      materialDesign:ValidationAssist.OnlyShowOnFocus="True"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <TextBox.Text>
-                        <Binding Path="Staff.Sdt" UpdateSourceTrigger="PropertyChanged"
+                        <Binding Path="Staff.Sdt" UpdateSourceTrigger="PropertyChanged" Delay="700"
                              ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <validation:RequiredValidation PropertyName="Số điện thoại" ValidatesOnTargetUpdated="True"/>

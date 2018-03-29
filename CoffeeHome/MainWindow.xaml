@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mainviewmodel="clr-namespace:CoffeeHome.ViewModel"
         xmlns:converter="clr-namespace:CoffeeHome.Converter"
+        xmlns:validation="clr-namespace:CoffeeHome.Validation"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:CoffeeHome"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -23,11 +24,23 @@
         <ResourceDictionary>
             <converter:LoginConverter x:Key="loginConverter"></converter:LoginConverter>
             <mainviewmodel:MainViewModel x:Key="mainViewModel"></mainviewmodel:MainViewModel>
+            <Style x:Key="CustomLoginMaterialDesignRaisedDarkButton" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="{x:Type Button}">
+                <Setter Property="IsEnabled" Value="false" />
+                <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding ElementName=txbUsername, Path=(Validation.HasError)}" Value="false" />
+                            <Condition Binding="{Binding ElementName=txbpPassword, Path=(Validation.HasError)}" Value="false" />
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="true" />
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="140"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -50,19 +63,44 @@
         </Grid>
         <DockPanel Grid.Row="1" Background="WhiteSmoke">
             <StackPanel  Background="WhiteSmoke" DockPanel.Dock="Top">
-                <TextBox Margin="100,80,100,0"
+                <AdornerDecorator>
+                    <TextBox Margin="100,80,100,0"
                      x:Name="txbUsername"
                      FontSize="14"
+                     materialDesign:ValidationAssist.Suppress="False"
+                     materialDesign:ValidationAssist.OnlyShowOnFocus="True"
                      FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
                      materialDesign:HintAssist.Hint="Tài khoản"
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Staff.Username" UpdateSourceTrigger="PropertyChanged" Delay="700"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:RequiredValidation PropertyName="Tên" ValidatesOnTargetUpdated="True"/>
+                                    <validation:MaxMinValidation PropertyName="Tên" ValidatesOnTargetUpdated="True" Max="100" Min="5"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
                 <PasswordBox Margin="100, 30 , 100, 0"
                      x:Name="txbpPassword"
                      FontSize="14"
                      FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
                      materialDesign:HintAssist.Hint="Mật khẩu"
-                         mainviewmodel:PasswordHelper.Attach="True"
-                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                     mainviewmodel:PasswordHelper.Attach="True"
+                     materialDesign:ValidationAssist.Suppress="False"
+                     materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                    <mainviewmodel:PasswordHelper.Password>
+                        <Binding Path="Staff.Password" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Delay="700"
+                             ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredValidation PropertyName="Mật khẩu" ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </mainviewmodel:PasswordHelper.Password>
+                </PasswordBox>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="100, 50 , 100, 0">
                     <Button Width="120"
                         x:Name="btnLogin"
@@ -72,7 +110,7 @@
                         FontWeight="Bold"
                         Background="#EA8024"
                         FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
-                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Style="{StaticResource CustomLoginMaterialDesignRaisedDarkButton}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth2"
                         Click="btnLogin_Click" Content="Đăng nhập">
                         <i:Interaction.Triggers>
@@ -111,6 +149,6 @@
                 </materialDesign:SnackbarMessage>
             </materialDesign:Snackbar>
         </DockPanel>
-        
+
     </Grid>
 </Window>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeHome.Model
 {
-    class StaffModel
+    public class StaffModel
     {
         private string id;
         private string name;
@@ -16,7 +16,7 @@ namespace CoffeeHome.Model
         private string email;
         private int sdt;
         private string level;
-        CoffeeHomeEntities db = new CoffeeHomeEntities();
+        private static CoffeeHomeEntities db = new CoffeeHomeEntities();
 
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
@@ -61,6 +61,37 @@ namespace CoffeeHome.Model
                               where s.username == username
                               where s.password == password
                               select s.id_staff).Count();
+                if (result > 0)
+                    return true;
+                else
+                    return false;
+            }catch(Exception e)
+            {
+                return false;
+            }
+        }
+
+        public static bool checkUniqueStaffEmail(string input)
+        {
+            try
+            {
+                var result = (from s in db.Staffs where s.email == input select s.id_staff).Count();
+                if (result > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public static bool checkUniqueStaffUsername(string input)
+        {
+            try
+            {
+                var result = (from s in db.Staffs where s.username == input select s.id_staff).Count();
                 if (result > 0)
                     return true;
                 else

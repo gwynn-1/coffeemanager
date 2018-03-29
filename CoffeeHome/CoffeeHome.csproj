@@ -132,7 +132,9 @@
     <Compile Include="Validation\EmailValidation.cs" />
     <Compile Include="Validation\MaxMinValidation.cs" />
     <Compile Include="Validation\NumericValidation.cs" />
+    <Compile Include="Validation\PasswordValidation.cs" />
     <Compile Include="Validation\RequiredValidation.cs" />
+    <Compile Include="Validation\UniqueValidation.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ItemField.cs" />

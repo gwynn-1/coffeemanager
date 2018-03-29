@@ -14,6 +14,15 @@ namespace CoffeeHome.ViewModel
     public class MainViewModel : BaseViewModel
     {
         public ICommand loginCommand { get; set; }
+        private StaffModel staff = new StaffModel();
+        public StaffModel Staff
+        {
+            get => staff; set
+            {
+                staff = value;
+                OnPropertyChanged("staff");
+            }
+        }
         public bool IsLoginFailed {
             get => isLoginFailed;
             set {
@@ -21,8 +30,7 @@ namespace CoffeeHome.ViewModel
                 OnPropertyChanged("isLoginFailed");
             }
         }
-
-        private StaffModel staff = new StaffModel();
+        
         private bool isLoginFailed;
 
         public MainViewModel()
@@ -33,7 +41,7 @@ namespace CoffeeHome.ViewModel
 
         private void OnLoginCommand(StaffModel obj)
         {
-            if(obj.Username == "adminer" && obj.Password == "adminer")
+            if(obj.Username == "adminerteam6769" && obj.Password == "6769")
             {
                 SignupWindow signupwindow = new SignupWindow();
                 Application.Current.MainWindow.Close();
@@ -53,8 +61,8 @@ namespace CoffeeHome.ViewModel
 
         private void ChangeToHome(StaffModel obj)
         {
-            staff = obj;
-            staff.Password = MD5Provider.MD5Encrypt(staff.Password);
+            Staff = obj;
+            Staff.Password = MD5Provider.MD5Encrypt(Staff.Password);
             if (staff.checkStaff(staff.Username, staff.Password))
             {
                 Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate () {

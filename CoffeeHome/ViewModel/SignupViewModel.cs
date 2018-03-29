@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace CoffeeHome.ViewModel
 {
-    class SignupViewModel:BaseViewModel
+    public class SignupViewModel:BaseViewModel
     {
         public ICommand signupCommand { get; set; }
         public StaffModel Staff { get => staff; set {
