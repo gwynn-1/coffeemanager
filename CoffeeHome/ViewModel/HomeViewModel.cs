@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using CoffeeHome.TemplateView;
 using System.Collections.ObjectModel;
+using CoffeeHome.Model;
 
 namespace CoffeeHome.ViewModel
 {
-    class HomeViewModel : BaseViewModel
+    public class HomeViewModel : BaseViewModel
     {
-        //private ItemField[] Items { get; }
         public ObservableCollection<ItemField> Items { get; }
+
+        public AdminTemplate template = new AdminTemplate();
         public HomeViewModel()
         {
             this.Items = new ObservableCollection<ItemField>(){
-                  new ItemField("Thức uống & Đồ ăn",new DrinkAndFoodTemplate(),"Images/drink-food.png"),
-                  new ItemField("Loại thức uống",new DrinkTypeTemplate(),"Images/drink-type.png")
+                  new ItemField("Đồ uống",this.template,"Images/drink-food.png"),
+                  new ItemField("Loại đồ uống",this.template,"Images/drink-type.png")
             };
         }
     }

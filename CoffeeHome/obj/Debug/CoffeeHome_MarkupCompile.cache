@@ -9,12 +9,21 @@ CoffeeHome
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\Study\UIT\3 - HK2\NMCNPM\git\coffeemanager\CoffeeHome\App.xaml
 4814483592
 21813036808
 24549451611
 201982986531
 HomeWindow.xaml;MainWindow.xaml;TemplateView\DrinkAndFoodTemplate.xaml;TemplateView\DrinkTypeTemplate.xaml;
+=======
+E:\Code Visual 2013\CoffeeHome\CoffeeHome\App.xaml
+41768018288
+21813036808
+38-1141446852
+22235059291
+HomeWindow.xaml;MainWindow.xaml;SignupWindow.xaml;TemplateView\AdminTemplate.xaml;
+>>>>>>> 728b0e7585b5c88138991cc7a0de375ffb4479fe
 
 True
 
