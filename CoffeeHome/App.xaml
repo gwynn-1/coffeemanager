@@ -53,7 +53,7 @@
                             Height="30" x:Name="titlebar">
                                     <Grid>
                                         <TextBlock Text="{TemplateBinding Title}" 
-                                               FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                                               FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"
                                                Margin="10,0,0,0"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Left"
@@ -68,7 +68,7 @@
                                                 Name="btnMinimize"
                                                 Click="btnMinimize_Click"
                                                 Margin="0,0,5,0">
-                                                <Image Source="Images/minimize.png" Width="20" Height="20"></Image>
+                                                <Image Source="Asset/Images/minimize.png" Width="20" Height="20"></Image>
                                             </Button>
                                             <Button Style="{StaticResource WindowControlButton}"
                                                 TabIndex="1"
@@ -76,13 +76,13 @@
                                                 Name="btnResize"
                                                 Click="btnResize_Click"
                                                 Padding="0">
-                                                <Image Source="Images/resize.png" Width="18" Height="18"></Image>
+                                                <Image Source="Asset/Images/resize.png" Width="18" Height="18"></Image>
                                             </Button>
                                             <Button Style="{StaticResource WindowControlButton}"
                                                 TabIndex="2"
                                                 Command="ApplicationCommands.Close"
                                                 Margin="5,0,10,0">
-                                                <Image Source="Images/close.png" Width="18" Height="18"></Image>
+                                                <Image Source="Asset/Images/close.png" Width="18" Height="18"></Image>
                                             </Button>
                                         </StackPanel>
                                     </Grid>

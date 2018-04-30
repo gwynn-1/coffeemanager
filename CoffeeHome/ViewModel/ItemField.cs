@@ -14,16 +14,18 @@ namespace CoffeeHome.ViewModel
     {
         private string _name;
         private object _content;
+        private object _datatableTemplate;
         private ScrollBarVisibility _horizontalScrollBarVisibilityRequirement;
         private ScrollBarVisibility _verticalScrollBarVisibilityRequirement;
         private Thickness _marginRequirement = new Thickness(16);
-        private string menuImage;
+        private string _menuImage;
 
-        public ItemField(string name, object content,string menuimage)
+        public ItemField(string name, object content,object datatable,string menuImage)
         {
             _name = name;
-            Content = content;
-            MenuImage = menuimage;
+            _content = content;
+            _datatableTemplate = datatable;
+            _menuImage = menuImage;
         }
 
         public string Name
@@ -56,7 +58,9 @@ namespace CoffeeHome.ViewModel
             set { this.MutateVerbose(ref _marginRequirement, value, RaisePropertyChanged()); }
         }
 
-        public string MenuImage { get { return menuImage; } set { this.MutateVerbose(ref menuImage, value, RaisePropertyChanged()); } }
+        public string MenuImage { get { return _menuImage; } set { this.MutateVerbose(ref _menuImage, value, RaisePropertyChanged()); } }
+
+        public object DatatableTemplate { get { return _datatableTemplate; } set { this.MutateVerbose(ref _datatableTemplate, value, RaisePropertyChanged()); } }
 
         private void MutateVerbose<ItemField>(ref ItemField control, ItemField value, Action<PropertyChangedEventArgs> action,[CallerMemberName] string propertyName = null)
         {

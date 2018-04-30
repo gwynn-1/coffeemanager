@@ -4,10 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-
              xmlns:local="clr-namespace:CoffeeHome.TemplateView"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,17 +23,58 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Background="Red">
-        <Button Width="120"
-                        Name="btnLogin"
-                        Margin="0,0,30,0"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Background="#EA8024"
-                        FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
-                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth2">
-            Template 2
-        </Button>
+    <Grid Background="White">
+        <DataGrid Margin="0 8 0 0"
+                      ItemsSource="{Binding DrinkTypeList}"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                      materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                        IsReadOnly="True">
+            <DataGrid.Columns>
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding id_type}"
+                                                              Header="ID"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                
+                <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding name}"
+                                                              Header="Tên Loại"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                <!-- set a max length to get an indicator in the editor -->
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding updated_at}"
+                                                              Header="Ngày Sửa"
+                                                              MaxLength="255"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding created_at}"
+                                                              Header="Ngày Tạo"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
+
+                <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+                <DataGridTemplateColumn Header="Hành động" Width="100"
+                                        IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <Button Content="Sửa" 
+                                        Margin="0 0 0 4" 
+                                        Padding="0"
+                                        Width="50"
+                                        Height="20"
+                                        FontSize="9"
+                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"></Button>
+                                <Button Content="Xóa" 
+                                        Margin="0 4 0 0" 
+                                        Padding="0" 
+                                        Width="50"
+                                        Height="20"
+                                        FontSize="9"
+                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

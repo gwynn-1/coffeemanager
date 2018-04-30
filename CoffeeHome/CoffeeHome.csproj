@@ -77,56 +77,85 @@
     <Compile Include="Converter\LoginConverter.cs" />
     <Compile Include="Converter\SignupConverter.cs" />
     <Compile Include="Model\Bill.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\BillDetailModel.cs" />
+    <Compile Include="Model\BillModel.cs" />
+    <Compile Include="Model\BillOnlineDetailModel.cs" />
+    <Compile Include="Model\BillOnlineModel.cs" />
     <Compile Include="Model\Bill_details.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Bill_Online.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Bill_Online_Detail.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CoffeeHomeEntityModel.Context.cs">
+    <Compile Include="Model\CoffeeHome.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CoffeeHomeEntityModel.Context.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CoffeeHomeEntityModel.cs">
+    <Compile Include="Model\CoffeeHome.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CoffeeHomeEntityModel.Designer.cs">
+    <Compile Include="Model\CoffeeHome.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CoffeeHomeEntityModel.edmx</DependentUpon>
+      <DependentUpon>CoffeeHome.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\Customer.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Model\DrinkAndDessert.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\DrinkDessertModel.cs" />
+    <Compile Include="Model\DrinkTypeModel.cs" />
     <Compile Include="Model\Drink_type.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Staff.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\StaffModel.cs" />
-    <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Table.cs">
-      <DependentUpon>CoffeeHomeEntityModel.tt</DependentUpon>
+      <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TableModel.cs" />
     <Compile Include="SignupWindow.xaml.cs">
       <DependentUpon>SignupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TemplateView\AdminTemplate.xaml.cs">
       <DependentUpon>AdminTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\BillDetailTemplate.xaml.cs">
+      <DependentUpon>BillDetailTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\BillOnlineDetailTemplate.xaml.cs">
+      <DependentUpon>BillOnlineDetailTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\BillOnlineTemplate.xaml.cs">
+      <DependentUpon>BillOnlineTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\BillTemplate.xaml.cs">
+      <DependentUpon>BillTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\CustomerTemplate.xaml.cs">
+      <DependentUpon>CustomerTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\DrinkTypeTemplate.xaml.cs">
+      <DependentUpon>DrinkTypeTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\FoodDrinkTemplate.xaml.cs">
+      <DependentUpon>FoodDrinkTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\TableTemplate.xaml.cs">
+      <DependentUpon>TableTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validation\ConfirmPasswordValidate.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
@@ -135,13 +164,21 @@
     <Compile Include="Validation\PasswordValidation.cs" />
     <Compile Include="Validation\RequiredValidation.cs" />
     <Compile Include="Validation\UniqueValidation.cs" />
+    <Compile Include="Vendor\MD5Provider\Source\MD5Provider.cs" />
+    <Compile Include="Vendor\PasswordHelper\Source\PasswordHelper.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BillDetailViewModel.cs" />
+    <Compile Include="ViewModel\BillOnlineDetailViewModel.cs" />
+    <Compile Include="ViewModel\BillOnlineViewModel.cs" />
+    <Compile Include="ViewModel\BillViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\DrinkTypeViewModel.cs" />
+    <Compile Include="ViewModel\DrinkDessertViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ItemField.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\MD5Provider.cs" />
-    <Compile Include="ViewModel\PasswordHelper.cs" />
     <Compile Include="ViewModel\SignupViewModel.cs" />
+    <Compile Include="ViewModel\TableViewModel.cs" />
     <Page Include="HomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +206,38 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TemplateView\BillDetailTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\BillOnlineDetailTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\BillOnlineTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\BillTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\CustomerTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\DrinkTypeTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\FoodDrinkTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\TableTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -188,38 +257,38 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="CoffeeHomeFont\SFEspressoShack-Bold.ttf" />
-    <Resource Include="CoffeeHomeFont\SFEspressoShack-BoldItalic.ttf" />
-    <Resource Include="CoffeeHomeFont\SFEspressoShack-Italic.ttf" />
-    <Resource Include="CoffeeHomeFont\SFEspressoShack.ttf" />
-    <Resource Include="CoffeeHomeFont\SFEspressoShackCondensed-B1.ttf" />
-    <Resource Include="CoffeeHomeFont\SFEspressoShackCondensed-Bo.ttf" />
-    <Resource Include="CoffeeHomeFont\SFEspressoShackCondensed-It.ttf" />
-    <Resource Include="CoffeeHomeFont\SFEspressoShackCondensed.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-Black.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-BlackItalic.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-Bold.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-BoldItalic.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-Italic.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-Light.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-LightItalic.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-Medium.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-MediumItalic.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-Regular.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-Thin.ttf" />
-    <Resource Include="CoffeeHomeFont\Roboto-ThinItalic.ttf" />
-    <Resource Include="CoffeeHomeFont\RobotoCondensed-Bold.ttf" />
-    <Resource Include="CoffeeHomeFont\RobotoCondensed-BoldItalic.ttf" />
-    <Resource Include="CoffeeHomeFont\RobotoCondensed-Italic.ttf" />
-    <Resource Include="CoffeeHomeFont\RobotoCondensed-Light.ttf" />
-    <Resource Include="CoffeeHomeFont\RobotoCondensed-LightItalic.ttf" />
-    <Resource Include="CoffeeHomeFont\RobotoCondensed-Regular.ttf" />
-    <EntityDeploy Include="Model\CoffeeHomeEntityModel.edmx">
+    <Resource Include="Asset\CoffeeHomeFont\SFEspressoShack-Bold.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\SFEspressoShack-BoldItalic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\SFEspressoShack-Italic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\SFEspressoShack.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\SFEspressoShackCondensed-B1.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\SFEspressoShackCondensed-Bo.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\SFEspressoShackCondensed-It.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\SFEspressoShackCondensed.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-Black.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-BlackItalic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-Bold.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-BoldItalic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-Italic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-Light.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-LightItalic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-Medium.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-MediumItalic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-Regular.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-Thin.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\Roboto-ThinItalic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\RobotoCondensed-Bold.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\RobotoCondensed-BoldItalic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\RobotoCondensed-Italic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\RobotoCondensed-Light.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\RobotoCondensed-LightItalic.ttf" />
+    <Resource Include="Asset\CoffeeHomeFont\RobotoCondensed-Regular.ttf" />
+    <EntityDeploy Include="Model\CoffeeHome.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CoffeeHomeEntityModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>CoffeeHome.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\CoffeeHomeEntityModel.edmx.diagram">
-      <DependentUpon>CoffeeHomeEntityModel.edmx</DependentUpon>
+    <None Include="Model\CoffeeHome.edmx.diagram">
+      <DependentUpon>CoffeeHome.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -231,32 +300,86 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\close.png" />
-    <Resource Include="Images\minimize.png" />
-    <Resource Include="Images\resize.png" />
+    <Resource Include="Asset\Images\close.png" />
+    <Resource Include="Asset\Images\minimize.png" />
+    <Resource Include="Asset\Images\resize.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\drink-type.png" />
+    <Resource Include="Asset\Images\drink-type.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\drink-food.png" />
+    <Resource Include="Asset\Images\drink-food.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Images\left-arrow.png" />
-    <Content Include="Model\CoffeeHomeEntityModel.Context.tt">
+    <Resource Include="Asset\Images\bill_online_detail.png" />
+    <Resource Include="Asset\Images\bill_online.png" />
+    <Resource Include="Asset\Images\bill_detail.png" />
+    <Resource Include="Asset\Images\bill.png" />
+    <Resource Include="Asset\Images\table.png" />
+    <Resource Include="Asset\Images\customer.png" />
+    <Resource Include="Asset\SaveAsset\30042018\americano-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\americano-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\bac-xiu.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\ca-phe-den-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\ca-phe-den-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\ca-phe-sua-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\ca-phe-sua-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\cappucino-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\cappucino-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\caramel-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\caramel-machiato-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\caramel-machiato-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\cookies-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\espresso-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\espresso-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\espresso-sua-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\hazelnut-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\latte-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\latte-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\matcha-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\matcha-latte-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\matcha-latte-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\matcha-macchiato.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mocha-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mocha-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mocha-hanh-nhan-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mocha-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mojito-chanh-day.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mojito-chanh-tuoi.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\nuoc-cam-tuoi.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\sinh-to-cam-xoai.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\sinh-to-dau-oi.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\sinh-to-viet-quat.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\socola-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\soda-tao-xanh.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\soda-viet-quat.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\toffee-hanh-nhan-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-dao-cam-sa.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-den-macchiato.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-hoa-dau-biec-macchiato.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-bac-ha-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-bac-ha-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-chanh-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-chanh-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-nho-den-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-nho-den-nong.jpg" />
+    <Content Include="Model\CoffeeHome.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CoffeeHomeEntityModel.Context.cs</LastGenOutput>
-      <DependentUpon>CoffeeHomeEntityModel.edmx</DependentUpon>
+      <DependentUpon>CoffeeHome.edmx</DependentUpon>
+      <LastGenOutput>CoffeeHome.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\CoffeeHomeEntityModel.tt">
+    <Content Include="Model\CoffeeHome.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CoffeeHomeEntityModel.edmx</DependentUpon>
-      <LastGenOutput>CoffeeHomeEntityModel.cs</LastGenOutput>
+      <DependentUpon>CoffeeHome.edmx</DependentUpon>
+      <LastGenOutput>CoffeeHome.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asset\Images\left-arrow.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
