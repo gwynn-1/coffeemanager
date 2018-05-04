@@ -10,6 +10,8 @@
         Title="Quản lý Cà Phê Coffee Home" Height="650" Width="1200"
         MaxWidth="{x:Static SystemParameters.MaximizedPrimaryScreenWidth}"
         MaxHeight="{x:Static SystemParameters.MaximizedPrimaryScreenHeight}"
+        MinHeight="450"
+        MinWidth="900"
         Style="{StaticResource CoffeeWindowStyle}" WindowState="Maximized">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close"
@@ -39,7 +41,7 @@
                                FontWeight="Bold"
                                FontSize="20"
                                Foreground="#FF2B2B2B"
-                               FontFamily="/CoffeeHome;component/CoffeeHomeFont/#SF Espresso Shack">
+                               FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#SF Espresso Shack">
                             Coffee Home - Admin
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -68,7 +70,7 @@
                                             <TextBlock Foreground="White" 
                                                        FontSize="16"
                                                        VerticalAlignment="Center"
-                                                       FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                                                       FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"
                                                        Text="{Binding Name}" 
                                                        Margin="32 0 32 0" />
                                         </StackPanel>

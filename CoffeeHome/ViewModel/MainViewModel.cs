@@ -1,5 +1,6 @@
 ﻿using CoffeeHome.Converter;
 using CoffeeHome.Model;
+using CoffeeHome.Vendor.MD5Provider.Source;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,15 @@ namespace CoffeeHome.ViewModel
     {
         public ICommand loginCommand { get; set; }
         private StaffModel staff = new StaffModel();
-        public StaffModel Staff
+
+        private Staff staffViewObject = new Staff();
+        public Staff StaffViewObject
         {
-            get => staff; set
+            get => staffViewObject;
+            set
             {
-                staff = value;
-                OnPropertyChanged("staff");
+                staffViewObject = value;
+                OnPropertyChanged("staffViewObject");
             }
         }
         public bool IsLoginFailed {
@@ -35,13 +39,13 @@ namespace CoffeeHome.ViewModel
 
         public MainViewModel()
         {
-            this.loginCommand = new RelayCommand<StaffModel>((p) => { return true; }, OnLoginCommand);
+            this.loginCommand = new RelayCommand<Staff>((p) => { return true; }, OnLoginCommand);
             IsLoginFailed = false;
         }
 
-        private void OnLoginCommand(StaffModel obj)
+        private void OnLoginCommand(Staff obj)
         {
-            if(obj.Username == "adminerteam6769" && obj.Password == "6769")
+            if(obj.username == "adminerteam6769" && obj.password == "6769")
             {
                 SignupWindow signupwindow = new SignupWindow();
                 Application.Current.MainWindow.Close();
@@ -59,11 +63,10 @@ namespace CoffeeHome.ViewModel
             }
         }
 
-        private void ChangeToHome(StaffModel obj)
+        private void ChangeToHome(Staff obj)
         {
-            Staff = obj;
-            Staff.Password = MD5Provider.MD5Encrypt(Staff.Password);
-            if (staff.checkStaff(staff.Username, staff.Password))
+            obj.password = MD5Provider.MD5Encrypt(obj.password);
+            if (staff.checkStaff(obj.username, obj.password))
             {
                 Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate () {
                     HomeWindow home = new HomeWindow();

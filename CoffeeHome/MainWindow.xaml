@@ -6,6 +6,7 @@
         xmlns:mainviewmodel="clr-namespace:CoffeeHome.ViewModel"
         xmlns:converter="clr-namespace:CoffeeHome.Converter"
         xmlns:validation="clr-namespace:CoffeeHome.Validation"
+        xmlns:passwordhelper="clr-namespace:CoffeeHome.Vendor.PasswordHelper.Source"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:CoffeeHome"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -56,7 +57,7 @@
                        HorizontalAlignment="Left"
                        Margin="30, 0, 0, 0"
                        Foreground="Black"
-                       FontSize="30" FontFamily="/CoffeeHome;component/CoffeeHomeFont/#SF Espresso Shack" 
+                       FontSize="30" FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#SF Espresso Shack" 
                        FontWeight="Bold">
                 Coffee Home
             </TextBlock>
@@ -69,11 +70,11 @@
                      FontSize="14"
                      materialDesign:ValidationAssist.Suppress="False"
                      materialDesign:ValidationAssist.OnlyShowOnFocus="True"
-                     FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                     FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"
                      materialDesign:HintAssist.Hint="Tài khoản"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         <TextBox.Text>
-                            <Binding Path="Staff.Username" UpdateSourceTrigger="PropertyChanged" Delay="700"
+                            <Binding Path="StaffViewObject.username" UpdateSourceTrigger="PropertyChanged" Delay="700"
                              ValidatesOnDataErrors="True">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tên" ValidatesOnTargetUpdated="True"/>
@@ -86,20 +87,20 @@
                 <PasswordBox Margin="100, 30 , 100, 0"
                      x:Name="txbpPassword"
                      FontSize="14"
-                     FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                     FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"
                      materialDesign:HintAssist.Hint="Mật khẩu"
-                     mainviewmodel:PasswordHelper.Attach="True"
+                     passwordhelper:PasswordHelper.Attach="True"
                      materialDesign:ValidationAssist.Suppress="False"
                      materialDesign:ValidationAssist.OnlyShowOnFocus="True"
                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-                    <mainviewmodel:PasswordHelper.Password>
-                        <Binding Path="Staff.Password" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Delay="700"
+                    <passwordhelper:PasswordHelper.Password>
+                        <Binding Path="StaffViewObject.password" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Delay="700"
                              ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <validation:RequiredValidation PropertyName="Mật khẩu" ValidatesOnTargetUpdated="True"/>
                             </Binding.ValidationRules>
                         </Binding>
-                    </mainviewmodel:PasswordHelper.Password>
+                    </passwordhelper:PasswordHelper.Password>
                 </PasswordBox>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="100, 50 , 100, 0">
                     <Button Width="120"
@@ -109,7 +110,7 @@
                         FontSize="16"
                         FontWeight="Bold"
                         Background="#EA8024"
-                        FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"
                         Style="{StaticResource CustomLoginMaterialDesignRaisedDarkButton}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth2"
                         Click="btnLogin_Click" Content="Đăng nhập">
@@ -120,7 +121,7 @@
                                         <MultiBinding Converter="{StaticResource loginConverter}">
                                             <MultiBinding.Bindings>
                                                 <Binding ElementName="txbUsername" Path="Text"/>
-                                                <Binding ElementName="txbpPassword" Path="(mainviewmodel:PasswordHelper.Password)"/>
+                                                <Binding ElementName="txbpPassword" Path="(passwordhelper:PasswordHelper.Password)"/>
                                             </MultiBinding.Bindings>
                                         </MultiBinding>
                                     </i:InvokeCommandAction.CommandParameter>
@@ -133,7 +134,7 @@
                         FontSize="16"
                         FontWeight="Bold"
                         Background="#EA8024"
-                        FontFamily="/CoffeeHome;component/CoffeeHomeFont/#Roboto"
+                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth2">
                         Thoát

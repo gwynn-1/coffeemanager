@@ -19,9 +19,9 @@ namespace CoffeeHome.Converter
                 string username = values[1].ToString();
                 string password = values[2].ToString();
                 string email = values[4].ToString();
-                //int sdt = int.Parse( (values[5].ToString() == "") ? "0" : values[5].ToString());
+                int sdt = int.Parse( (values[5].ToString() == "") ? "0" : values[5].ToString());
 
-                return new StaffModel { Name=name, Username = username, Password = password,Email = email/*,Sdt = sdt*/ };
+                return new Staff { name=name, username = username, password = password,email = email,sdt = sdt };
             }
             return null;
         }
