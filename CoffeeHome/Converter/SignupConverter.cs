@@ -19,7 +19,11 @@ namespace CoffeeHome.Converter
                 string username = values[1].ToString();
                 string password = values[2].ToString();
                 string email = values[4].ToString();
-                int sdt = int.Parse( (values[5].ToString() == "") ? "0" : values[5].ToString());
+                int sdt;
+                if (!int.TryParse((values[5].ToString() == "") ? "0" : values[5].ToString(), out sdt))
+                {
+                    sdt = 0;
+                }
 
                 return new Staff { name=name, username = username, password = password,email = email,sdt = sdt };
             }

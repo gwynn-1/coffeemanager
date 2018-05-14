@@ -15,5 +15,21 @@ namespace CoffeeHome.Model
             var list = db.Tables.ToList();
             return (list as List<Table>);
         }
+
+        public bool create(Table table)
+        {
+            try
+            {
+                table.created_at = DateTime.Now;
+                table.updated_at = DateTime.Now;
+                db.Tables.Add(table);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

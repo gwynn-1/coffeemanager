@@ -61,7 +61,7 @@ namespace CoffeeHome.ViewModel
         public string MenuImage { get { return _menuImage; } set { this.MutateVerbose(ref _menuImage, value, RaisePropertyChanged()); } }
 
         public object DatatableTemplate { get { return _datatableTemplate; } set { this.MutateVerbose(ref _datatableTemplate, value, RaisePropertyChanged()); } }
-
+        
         private void MutateVerbose<ItemField>(ref ItemField control, ItemField value, Action<PropertyChangedEventArgs> action,[CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<ItemField>.Default.Equals(control, value)) return;

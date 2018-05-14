@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\Code Visual 2013\CoffeeHome\CoffeeHome\App.xaml
-12-2063838052
+20-1352493474
 2828594563
-651975842256
-22235059291
-HomeWindow.xaml;MainWindow.xaml;SignupWindow.xaml;TemplateView\AdminTemplate.xaml;TemplateView\BillDetailTemplate.xaml;TemplateView\BillOnlineDetailTemplate.xaml;TemplateView\BillOnlineTemplate.xaml;TemplateView\BillTemplate.xaml;TemplateView\CustomerTemplate.xaml;TemplateView\DrinkTypeTemplate.xaml;TemplateView\FoodDrinkTemplate.xaml;TemplateView\TableTemplate.xaml;
+84-237763171
+231780554789
+HomeWindow.xaml;MainWindow.xaml;SignupWindow.xaml;TemplateView\AdminTemplate.xaml;TemplateView\CRUTemplate\BillCRUDialog.xaml;TemplateView\CRUTemplate\BillDetailCRUDialog.xaml;TemplateView\CRUTemplate\BillOnlineCRUDialog.xaml;TemplateView\CRUTemplate\BillOnlineDetailCRUDialog.xaml;TemplateView\CRUTemplate\CustomerCRUDialog.xaml;TemplateView\CRUTemplate\DrinkTypeCRUDialog.xaml;TemplateView\CRUTemplate\FoodDrinkCRUDialog.xaml;TemplateView\CRUTemplate\TableCRUDialog.xaml;TemplateView\ListViewTemplate\BillDetailTemplate.xaml;TemplateView\ListViewTemplate\BillOnlineDetailTemplate.xaml;TemplateView\ListViewTemplate\BillOnlineTemplate.xaml;TemplateView\ListViewTemplate\BillTemplate.xaml;TemplateView\ListViewTemplate\CustomerTemplate.xaml;TemplateView\ListViewTemplate\DrinkTypeTemplate.xaml;TemplateView\ListViewTemplate\FoodDrinkTemplate.xaml;TemplateView\ListViewTemplate\TableTemplate.xaml;
 
 True
 

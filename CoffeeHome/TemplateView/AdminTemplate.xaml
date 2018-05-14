@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:CoffeeHome.TemplateView"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1010">
@@ -56,6 +57,12 @@
                             <Run Text="Thêm"/>
                             <Run Text="{Binding Name}"/>
                         </TextBlock>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding DatatableTemplate.DataContext.OpenCruDialogCommand}">
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </Button>
                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Grid.Row="1" Margin="0,7,0,0">
                         <TextBlock FontSize="16"

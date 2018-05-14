@@ -15,5 +15,21 @@ namespace CoffeeHome.Model
             var list = db.Drink_type.ToList();
             return (list as List<Drink_type>);
         }
+
+        public bool create(Drink_type drink_Type)
+        {
+            try
+            {
+                drink_Type.created_at = DateTime.Now;
+                drink_Type.updated_at = DateTime.Now;
+                db.Drink_type.Add(drink_Type);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

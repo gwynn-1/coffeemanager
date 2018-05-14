@@ -1,0 +1,160 @@
+﻿<UserControl x:Class="CoffeeHome.TemplateView.CRUTemplate.BillOnlineCRUDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:validation="clr-namespace:CoffeeHome.Validation"
+             xmlns:converter="clr-namespace:CoffeeHome.Converter"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:CoffeeHome.TemplateView.CRUTemplate"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:BillOnlineConverter x:Key="billOnlineConverter"></converter:BillOnlineConverter>
+        <Style x:Key="DrinkDessertButtonDialog" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="{x:Type Button}">
+            <Setter Property="IsEnabled" Value="false" />
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding ElementName=txbTotal, Path=(Validation.HasError)}" Value="false" />
+                        <Condition Binding="{Binding ElementName=txbName, Path=(Validation.HasError)}" Value="false" />
+                        <Condition Binding="{Binding ElementName=txbAddress, Path=(Validation.HasError)}" Value="false" />
+                        <Condition Binding="{Binding ElementName=txbSDT, Path=(Validation.HasError)}" Value="false" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="IsEnabled" Value="true" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="16" Width="600" Height="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock Foreground="#EA8024" Grid.Row="0" VerticalAlignment="Center"
+                           FontSize="20" 
+                           FontWeight="Bold"
+                           FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto Condensed"
+                           Padding="0,5,0,5">
+            <Run Text="{Binding Action}"/>
+            <Run Text="Hóa đơn Online"/>
+        </TextBlock>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <AdornerDecorator>
+                    <TextBox x:Name="txbName"
+                             materialDesign:HintAssist.Hint="Tên khách hàng" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="BillOnlineViewObject.name_customer" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:RequiredValidation PropertyName="Tên khách hàng" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator>
+                    <TextBox x:Name="txbAddress"
+                             materialDesign:HintAssist.Hint="Địa chỉ" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="BillOnlineViewObject.address" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:RequiredValidation PropertyName="Địa chỉ" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator>
+                    <TextBox x:Name="txbSDT"
+                             materialDesign:HintAssist.Hint="Số điện thoại" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="BillOnlineViewObject.sdt" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:RequiredValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
+                                    <validation:NumericValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator>
+                    <TextBox x:Name="txbTotal"
+                             materialDesign:HintAssist.Hint="Tổng tiền" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="BillOnlineViewObject.total_price" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:RequiredValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
+                                    <validation:NumericValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+                <!--<Expander HorizontalAlignment="Stretch"
+                          Header="Chi tiết"
+                          Margin="0 18 0 0">
+                    <StackPanel Orientation="Vertical"
+                              TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                              Margin="24,8,24,16">
+                        
+                    </StackPanel>
+                </Expander>-->
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0 16 0 0">
+            <Button IsDefault="True" Style="{DynamicResource DrinkDessertButtonDialog}"
+                    >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding CreateCommand}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                <MultiBinding Converter="{StaticResource billOnlineConverter}">
+                                    <MultiBinding.Bindings>
+                                        <Binding ElementName="txbTotal" Path="Text"/>
+                                        <Binding ElementName="txbAddress" Path="Text"/>
+                                        <Binding ElementName="txbName" Path="Text"/>
+                                        <Binding ElementName="txbSDT" Path="Text"/>
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                ACCEPT
+            </Button>
+            <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>False</system:Boolean>
+                </Button.CommandParameter>
+                CANCEL
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

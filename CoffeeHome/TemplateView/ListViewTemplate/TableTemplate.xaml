@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="CoffeeHome.TemplateView.ListViewTemplate.TableTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CoffeeHome.TemplateView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Amber.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.lime.xaml" />
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Amber.Named.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary700}"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid Margin="0 8 0 0"
+                      ItemsSource="{Binding TableViewSource.View}"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                      materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                        IsReadOnly="True">
+            <DataGrid.Columns>
+                <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding id_table}"
+                                                              Header="ID"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                <!-- set a max length to get an indicator in the editor -->
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding name}"
+                                                              Header="Tên"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding status}"
+                                                              Header="Trạng thái"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding updated_at}"
+                                                              Header="Ngày Sửa"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding created_at}"
+                                                              Header="Ngày Tạo"
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
+
+
+                <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+                <DataGridTemplateColumn Header="Hành động" Width="100"
+                                        IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <Button Content="Sửa" 
+                                        Margin="0 0 0 4" 
+                                        Padding="0"
+                                        Width="50"
+                                        Height="20"
+                                        FontSize="9"
+                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"></Button>
+                                <Button Content="Xóa" 
+                                        Margin="0 4 0 0" 
+                                        Padding="0" 
+                                        Width="50"
+                                        Height="20"
+                                        FontSize="9"
+                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <materialDesign:Snackbar 
+                      DockPanel.Dock="Bottom"
+                      IsActive="{Binding IsError,Mode=TwoWay}"
+                      x:Name="SnackbarError">
+            <materialDesign:SnackbarMessage Content="{Binding ErrorContent}"
+                                                ActionContent="OK" ActionClick="SnackbarErrorMessage_ActionClick">
+            </materialDesign:SnackbarMessage>
+        </materialDesign:Snackbar>
+        <materialDesign:Snackbar 
+                      DockPanel.Dock="Bottom"
+                      IsActive="{Binding IsSuccess,Mode=TwoWay}"
+                      x:Name="SnackbarSuccess">
+            <materialDesign:SnackbarMessage Content="{Binding SuccessContent}"
+                                                ActionContent="OK" ActionClick="SnackbarSuccessMessage_ActionClick">
+            </materialDesign:SnackbarMessage>
+        </materialDesign:Snackbar>
+    </Grid>
+</UserControl>

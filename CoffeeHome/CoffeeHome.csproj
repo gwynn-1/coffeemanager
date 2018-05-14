@@ -45,6 +45,7 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.953, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
@@ -74,8 +75,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\BillConverter.cs" />
+    <Compile Include="Converter\BillDetailConverter.cs" />
+    <Compile Include="Converter\BillOnlineConverter.cs" />
+    <Compile Include="Converter\BillOnlineDetailConverter.cs" />
+    <Compile Include="Converter\CustomerConverter.cs" />
+    <Compile Include="Converter\DrinkDessertConverter.cs" />
+    <Compile Include="Converter\DrinkTypeConverter.cs" />
+    <Compile Include="Converter\ImageSourceConverter.cs" />
     <Compile Include="Converter\LoginConverter.cs" />
     <Compile Include="Converter\SignupConverter.cs" />
+    <Compile Include="Converter\TableConverter.cs" />
     <Compile Include="Model\Bill.cs">
       <DependentUpon>CoffeeHome.tt</DependentUpon>
     </Compile>
@@ -133,32 +143,57 @@
     <Compile Include="TemplateView\AdminTemplate.xaml.cs">
       <DependentUpon>AdminTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\BillDetailTemplate.xaml.cs">
+    <Compile Include="TemplateView\CRUTemplate\BillCRUDialog.xaml.cs">
+      <DependentUpon>BillCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\CRUTemplate\BillDetailCRUDialog.xaml.cs">
+      <DependentUpon>BillDetailCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\CRUTemplate\BillOnlineCRUDialog.xaml.cs">
+      <DependentUpon>BillOnlineCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\CRUTemplate\BillOnlineDetailCRUDialog.xaml.cs">
+      <DependentUpon>BillOnlineDetailCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\CRUTemplate\CustomerCRUDialog.xaml.cs">
+      <DependentUpon>CustomerCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\CRUTemplate\DrinkTypeCRUDialog.xaml.cs">
+      <DependentUpon>DrinkTypeCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\CRUTemplate\FoodDrinkCRUDialog.xaml.cs">
+      <DependentUpon>FoodDrinkCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\CRUTemplate\TableCRUDialog.xaml.cs">
+      <DependentUpon>TableCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\ListViewTemplate\BillDetailTemplate.xaml.cs">
       <DependentUpon>BillDetailTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\BillOnlineDetailTemplate.xaml.cs">
+    <Compile Include="TemplateView\ListViewTemplate\BillOnlineDetailTemplate.xaml.cs">
       <DependentUpon>BillOnlineDetailTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\BillOnlineTemplate.xaml.cs">
+    <Compile Include="TemplateView\ListViewTemplate\BillOnlineTemplate.xaml.cs">
       <DependentUpon>BillOnlineTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\BillTemplate.xaml.cs">
+    <Compile Include="TemplateView\ListViewTemplate\BillTemplate.xaml.cs">
       <DependentUpon>BillTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\CustomerTemplate.xaml.cs">
+    <Compile Include="TemplateView\ListViewTemplate\CustomerTemplate.xaml.cs">
       <DependentUpon>CustomerTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\DrinkTypeTemplate.xaml.cs">
+    <Compile Include="TemplateView\ListViewTemplate\DrinkTypeTemplate.xaml.cs">
       <DependentUpon>DrinkTypeTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\FoodDrinkTemplate.xaml.cs">
+    <Compile Include="TemplateView\ListViewTemplate\FoodDrinkTemplate.xaml.cs">
       <DependentUpon>FoodDrinkTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TemplateView\TableTemplate.xaml.cs">
+    <Compile Include="TemplateView\ListViewTemplate\TableTemplate.xaml.cs">
       <DependentUpon>TableTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validation\ConfirmPasswordValidate.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
+    <Compile Include="Validation\ImageValidation.cs" />
     <Compile Include="Validation\MaxMinValidation.cs" />
     <Compile Include="Validation\NumericValidation.cs" />
     <Compile Include="Validation\PasswordValidation.cs" />
@@ -166,6 +201,7 @@
     <Compile Include="Validation\UniqueValidation.cs" />
     <Compile Include="Vendor\MD5Provider\Source\MD5Provider.cs" />
     <Compile Include="Vendor\PasswordHelper\Source\PasswordHelper.cs" />
+    <Compile Include="Vendor\UploadFile\Source\UploadFile.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillDetailViewModel.cs" />
     <Compile Include="ViewModel\BillOnlineDetailViewModel.cs" />
@@ -206,35 +242,67 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\BillDetailTemplate.xaml">
+    <Page Include="TemplateView\CRUTemplate\BillCRUDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\BillOnlineDetailTemplate.xaml">
+    <Page Include="TemplateView\CRUTemplate\BillDetailCRUDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\BillOnlineTemplate.xaml">
+    <Page Include="TemplateView\CRUTemplate\BillOnlineCRUDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\BillTemplate.xaml">
+    <Page Include="TemplateView\CRUTemplate\BillOnlineDetailCRUDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\CustomerTemplate.xaml">
+    <Page Include="TemplateView\CRUTemplate\CustomerCRUDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\DrinkTypeTemplate.xaml">
+    <Page Include="TemplateView\CRUTemplate\DrinkTypeCRUDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\FoodDrinkTemplate.xaml">
+    <Page Include="TemplateView\CRUTemplate\FoodDrinkCRUDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateView\TableTemplate.xaml">
+    <Page Include="TemplateView\CRUTemplate\TableCRUDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\ListViewTemplate\BillDetailTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\ListViewTemplate\BillOnlineDetailTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\ListViewTemplate\BillOnlineTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\ListViewTemplate\BillTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\ListViewTemplate\CustomerTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\ListViewTemplate\DrinkTypeTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\ListViewTemplate\FoodDrinkTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\ListViewTemplate\TableTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,12 +379,60 @@
     <Resource Include="Asset\Images\drink-food.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Asset\Images\bill_online_detail.png" />
-    <Resource Include="Asset\Images\bill_online.png" />
-    <Resource Include="Asset\Images\bill_detail.png" />
     <Resource Include="Asset\Images\bill.png" />
-    <Resource Include="Asset\Images\table.png" />
+    <Resource Include="Asset\Images\bill_detail.png" />
+    <Resource Include="Asset\Images\bill_online.png" />
+    <Resource Include="Asset\Images\bill_online_detail.png" />
     <Resource Include="Asset\Images\customer.png" />
+    <Resource Include="Asset\Images\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asset\SaveAsset\30042018\americano-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\americano-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\bac-xiu.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\ca-phe-den-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\ca-phe-den-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\ca-phe-sua-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\ca-phe-sua-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\cappucino-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\cappucino-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\caramel-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\caramel-machiato-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\caramel-machiato-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\cookies-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\espresso-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\espresso-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\espresso-sua-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\hazelnut-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\latte-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\latte-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\matcha-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\matcha-latte-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\matcha-latte-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\matcha-macchiato.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mocha-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mocha-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mocha-hanh-nhan-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mocha-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mojito-chanh-day.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\mojito-chanh-tuoi.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\nuoc-cam-tuoi.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\sinh-to-cam-xoai.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\sinh-to-dau-oi.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\sinh-to-viet-quat.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\socola-da-xay.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\soda-tao-xanh.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\soda-viet-quat.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\toffee-hanh-nhan-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-dao-cam-sa.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-den-macchiato.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-hoa-dau-biec-macchiato.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-bac-ha-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-bac-ha-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-chanh-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-chanh-nong.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-nho-den-da.jpg" />
+    <Resource Include="Asset\SaveAsset\30042018\tra-huong-vi-nho-den-nong.jpg" />
     <Resource Include="Asset\SaveAsset\30042018\americano-da.jpg" />
     <Resource Include="Asset\SaveAsset\30042018\americano-nong.jpg" />
     <Resource Include="Asset\SaveAsset\30042018\bac-xiu.jpg" />

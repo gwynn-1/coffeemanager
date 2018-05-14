@@ -16,7 +16,7 @@ namespace CoffeeHome.Validation
         {
             ValidationResult result = new ValidationResult(true, null);
             int num;
-            if (!int.TryParse(value.ToString(), out num))
+            if (value !=null && !int.TryParse(value.ToString(), out num))
                 result = new ValidationResult(false, this.PropertyName + " phải là kí tự số");
             return result;
         }

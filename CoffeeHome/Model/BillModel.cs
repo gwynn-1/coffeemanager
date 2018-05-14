@@ -15,5 +15,21 @@ namespace CoffeeHome.Model
             var list = db.Bills.ToList();
             return (list as List<Bill>);
         }
+
+        public bool create(Bill bill)
+        {
+            try
+            {
+                bill.created_at = DateTime.Now;
+                bill.updated_at = DateTime.Now;
+                db.Bills.Add(bill);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

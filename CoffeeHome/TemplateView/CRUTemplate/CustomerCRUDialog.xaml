@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="CoffeeHome.TemplateView.CRUTemplate.CustomerCRUDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:validation="clr-namespace:CoffeeHome.Validation"
+             xmlns:converter="clr-namespace:CoffeeHome.Converter"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:CoffeeHome.TemplateView.CRUTemplate"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <converter:CustomerConverter x:Key="customerConverter"></converter:CustomerConverter>
+        <Style x:Key="DrinkDessertButtonDialog" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="{x:Type Button}">
+            <Setter Property="IsEnabled" Value="false" />
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding ElementName=txbName, Path=(Validation.HasError)}" Value="false" />
+                        <Condition Binding="{Binding ElementName=txbEmail, Path=(Validation.HasError)}" Value="false" />
+                        <Condition Binding="{Binding ElementName=txbCMND, Path=(Validation.HasError)}" Value="false" />
+                        <Condition Binding="{Binding ElementName=txbPoints, Path=(Validation.HasError)}" Value="false" />
+                        <Condition Binding="{Binding ElementName=txbSDT, Path=(Validation.HasError)}" Value="false" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="IsEnabled" Value="true" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="16" Width="600" Height="420">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock Foreground="#EA8024" Grid.Row="0" VerticalAlignment="Center"
+                           FontSize="20" 
+                           FontWeight="Bold"
+                           FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto Condensed"
+                           Padding="0,5,0,5">
+            <Run Text="{Binding Action}"/>
+            <Run Text="Khách hàng"/>
+        </TextBlock>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <AdornerDecorator>
+                    <TextBox x:Name="txbName"
+                             materialDesign:HintAssist.Hint="Tên" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="CustomerViewObject.name" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:RequiredValidation PropertyName="Tên" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator>
+                    <TextBox x:Name="txbEmail"
+                             materialDesign:HintAssist.Hint="Email" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="CustomerViewObject.email" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:RequiredValidation PropertyName="Email" ValidatesOnTargetUpdated="True"/>
+                                    <validation:EmailValidation PropertyName="Email" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator>
+                    <TextBox x:Name="txbCMND"
+                             materialDesign:HintAssist.Hint="CMND" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="CustomerViewObject.cmnd" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:RequiredValidation PropertyName="CMND" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator>
+                    <TextBox x:Name="txbSDT"
+                             materialDesign:HintAssist.Hint="SDT" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="CustomerViewObject.sdt" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:NumericValidation PropertyName="SDT" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator>
+                    <TextBox x:Name="txbPoints"
+                             materialDesign:HintAssist.Hint="Điểm khách hàng" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 18 0 0"
+                             materialDesign:ValidationAssist.Suppress="False"
+                             materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                             FontSize="16">
+                        <TextBox.Text>
+                            <Binding Path="CustomerViewObject.points" UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                                <Binding.ValidationRules>
+                                    <validation:NumericValidation PropertyName="Điểm khách hàng" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </AdornerDecorator>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0 16 0 0">
+            <Button IsDefault="True" Style="{DynamicResource DrinkDessertButtonDialog}"
+                    >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding CreateCommand}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                <MultiBinding Converter="{StaticResource customerConverter}">
+                                    <MultiBinding.Bindings>
+                                        <Binding ElementName="txbName" Path="Text"/>
+                                        <Binding ElementName="txbEmail" Path="Text"/>
+                                        <Binding ElementName="txbSDT" Path="Text"/>
+                                        <Binding ElementName="txbCMND" Path="Text"/>
+                                        <Binding ElementName="txbPoints" Path="Text"/>
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                ACCEPT
+            </Button>
+            <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>False</system:Boolean>
+                </Button.CommandParameter>
+                CANCEL
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

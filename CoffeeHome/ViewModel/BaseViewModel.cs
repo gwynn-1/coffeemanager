@@ -16,6 +16,67 @@ namespace CoffeeHome.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        protected bool isError;
+        public bool IsError
+        {
+            get => isError;
+            set
+            {
+                isError = value;
+                OnPropertyChanged("isError");
+            }
+        }
+
+        protected string errorContent;
+        public string ErrorContent
+        {
+            get => errorContent;
+            set
+            {
+                errorContent = value;
+                OnPropertyChanged("errorContent");
+            }
+        }
+
+        protected bool isSuccess;
+        public bool IsSuccess
+        {
+            get => isSuccess;
+            set
+            {
+                isSuccess = value;
+                OnPropertyChanged("isSuccess");
+            }
+        }
+
+        protected string successContent;
+        public string SuccessContent
+        {
+            get => successContent;
+            set
+            {
+                successContent = value;
+                OnPropertyChanged("successContent");
+            }
+        }
+
+        protected void BindingMessage(bool status, string message)
+        {
+            if (status)
+            {
+                IsSuccess = true;
+                IsError = false;
+                SuccessContent = message;
+            }
+            else
+            {
+
+                IsSuccess = false;
+                IsError = true;
+                ErrorContent = message;
+            }
+        }
     }
     class RelayCommand<T> : ICommand
     {

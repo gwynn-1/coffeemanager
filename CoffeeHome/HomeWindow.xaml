@@ -57,29 +57,31 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid>
-                <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
-                    <materialDesign:DrawerHost.LeftDrawerContent>
-                        <DockPanel MinWidth="212" Background="#353F40">
-                            <ListBox x:Name="DemoItemsListBox" Margin="0 16 0 16" SelectedIndex="0"  
+                <materialDesign:DialogHost Identifier="RootDialog">
+                    <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+                        <materialDesign:DrawerHost.LeftDrawerContent>
+                            <DockPanel MinWidth="212" Background="#353F40">
+                                <ListBox x:Name="DemoItemsListBox" Margin="0 16 0 16" SelectedIndex="0"  
                                      ItemsSource="{Binding Items}"
                                      PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate DataType="homeViewModel:ItemField">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="{Binding MenuImage}" Margin="15,0,0,0" Width="32" Height="32"></Image>
-                                            <TextBlock Foreground="White" 
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate DataType="homeViewModel:ItemField">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding MenuImage}" Margin="15,0,0,0" Width="32" Height="32"></Image>
+                                                <TextBlock Foreground="White" 
                                                        FontSize="16"
                                                        VerticalAlignment="Center"
                                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"
                                                        Text="{Binding Name}" 
                                                        Margin="32 0 32 0" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </DockPanel>
-                    </materialDesign:DrawerHost.LeftDrawerContent>
-                </materialDesign:DrawerHost>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DockPanel>
+                        </materialDesign:DrawerHost.LeftDrawerContent>
+                    </materialDesign:DrawerHost>
+                </materialDesign:DialogHost>
                 <Grid Panel.ZIndex="-1">
                     <ScrollViewer HorizontalScrollBarVisibility="{Binding ElementName=DemoItemsListBox, Path=SelectedItem.HorizontalScrollBarVisibilityRequirement}"
                                   VerticalScrollBarVisibility="{Binding ElementName=DemoItemsListBox, Path=SelectedItem.VerticalScrollBarVisibilityRequirement}" 
