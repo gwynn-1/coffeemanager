@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:converter="clr-namespace:CoffeeHome.Converter"
              xmlns:local="clr-namespace:CoffeeHome.TemplateView"
+             x:Name="billDetailTemplate"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
+            <converter:DialogBillDetailConverter x:Key="dialogBillDetailConverter"></converter:DialogBillDetailConverter>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
@@ -28,6 +32,7 @@
                       ItemsSource="{Binding BillDetailViewSource.View}"
                       CanUserSortColumns="True"
                       CanUserAddRows="False"
+                  x:Name="dtgrBillDetail"
                       AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                       materialDesign:DataGridAssist.ColumnHeaderPadding="8"
@@ -68,14 +73,44 @@
                                         Width="50"
                                         Height="20"
                                         FontSize="9"
-                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"></Button>
+                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding ElementName=billDetailTemplate, Path=DataContext.OpenCruDialogCommand}">
+                                                <i:InvokeCommandAction.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource dialogBillDetailConverter}">
+                                                        <MultiBinding.Bindings>
+                                                            <Binding Path="Bill.id_bill"/>
+                                                            <Binding Path="DrinkAndDessert.id_drink"/>
+                                                        </MultiBinding.Bindings>
+                                                    </MultiBinding>
+                                                </i:InvokeCommandAction.CommandParameter>
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
                                 <Button Content="Xóa" 
                                         Margin="0 4 0 0" 
                                         Padding="0" 
                                         Width="50"
                                         Height="20"
                                         FontSize="9"
-                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"></Button>
+                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding ElementName=billDetailTemplate, Path=DataContext.OpenDeleteDialogCommand}">
+                                                <i:InvokeCommandAction.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource dialogBillDetailConverter}">
+                                                        <MultiBinding.Bindings>
+                                                            <Binding Path="Bill.id_bill"/>
+                                                            <Binding Path="DrinkAndDessert.id_drink"/>
+                                                        </MultiBinding.Bindings>
+                                                    </MultiBinding>
+                                                </i:InvokeCommandAction.CommandParameter>
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

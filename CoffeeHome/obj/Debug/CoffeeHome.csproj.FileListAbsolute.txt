@@ -67,3 +67,5 @@ E:\Code Visual 2013\CoffeeHome\CoffeeHome\obj\Debug\TemplateView\CRUTemplate\Bil
 E:\Code Visual 2013\CoffeeHome\CoffeeHome\obj\Debug\TemplateView\CRUTemplate\BillOnlineCRUDialog.baml
 E:\Code Visual 2013\CoffeeHome\CoffeeHome\obj\Debug\TemplateView\CRUTemplate\BillOnlineDetailCRUDialog.g.cs
 E:\Code Visual 2013\CoffeeHome\CoffeeHome\obj\Debug\TemplateView\CRUTemplate\BillOnlineDetailCRUDialog.baml
+E:\Code Visual 2013\CoffeeHome\CoffeeHome\obj\Debug\TemplateView\DeleteTemplate\DeleteDialog.g.cs
+E:\Code Visual 2013\CoffeeHome\CoffeeHome\obj\Debug\TemplateView\DeleteTemplate\DeleteDialog.baml

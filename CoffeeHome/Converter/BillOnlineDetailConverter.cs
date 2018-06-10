@@ -36,7 +36,7 @@ namespace CoffeeHome.Converter
                     _price = 0;
                 }
 
-                return new Bill_Online_Detail { id_bill = _idbill, id_drink = _iddrink, quantity = _quantity, price = _price };
+                return new Bill_Online_Detail { id_drink = _iddrink, id_bill = _idbill,  quantity = _quantity, price = _price };
             }
             return null;
         }

@@ -6,8 +6,10 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:validation="clr-namespace:CoffeeHome.Validation"
              xmlns:converter="clr-namespace:CoffeeHome.Converter"
+             xmlns:viewmodel="clr-namespace:CoffeeHome.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             x:Name="billDetailDialog"
              xmlns:local="clr-namespace:CoffeeHome.TemplateView.CRUTemplate"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1000">
@@ -51,11 +53,12 @@
                                   MinWidth="72"
                                   MaxWidth="415"
                                   FontSize="16"
+                                  IsEditable="{Binding IsDisableCombobox}" IsHitTestVisible="{Binding IsDisableCombobox}" Focusable="{Binding IsDisableCombobox}"
                                   VerticalAlignment="Bottom"
                                   ItemsSource="{Binding BillList}"
                                   DisplayMemberPath="id_bill"
                                   SelectedValuePath="id_bill"
-                                  SelectedIndex="0">
+                                  SelectedValue="{Binding BillDetailViewObject.id_bill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                 </DockPanel>
                 <DockPanel Margin="0 18 0 0">
@@ -69,16 +72,18 @@
                                   MaxWidth="390"
                                   FontSize="16"
                                   VerticalAlignment="Bottom"
+                              IsEditable="{Binding IsDisableCombobox}" IsHitTestVisible="{Binding IsDisableCombobox}" Focusable="{Binding IsDisableCombobox}"
                                   ItemsSource="{Binding DrinkDessertList}"
                                   DisplayMemberPath="name"
                                   SelectedValuePath="id_drink"
-                                  SelectedIndex="0">
+                                  SelectedValue="{Binding BillDetailViewObject.id_food,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=cbbDrink, Path=SelectedValue}">
                                 </i:InvokeCommandAction>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
+                       
                     </ComboBox>
                 </DockPanel>
                 <AdornerDecorator>
@@ -92,8 +97,8 @@
                             <Binding Path="BillDetailViewObject.quantity" UpdateSourceTrigger="PropertyChanged"
                              ValidatesOnDataErrors="True">
                                 <Binding.ValidationRules>
-                                    <validation:RequiredValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
-                                    <validation:NumericValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
+                                    <validation:RequiredValidation PropertyName="Số lượng" ValidatesOnTargetUpdated="True"/>
+                                    <validation:NumericValidation PropertyName="Số lượng" ValidatesOnTargetUpdated="True"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -125,7 +130,7 @@
                     >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding CreateCommand}">
+                        <i:InvokeCommandAction Command="{Binding SubmitCommand}">
                             <i:InvokeCommandAction.CommandParameter>
                                 <MultiBinding Converter="{StaticResource billDetailConverter}">
                                     <MultiBinding.Bindings>

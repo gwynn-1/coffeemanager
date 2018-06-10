@@ -12,17 +12,23 @@ namespace CoffeeHome.Vendor.UploadFile.Source
     {
         public static string UploadFileToUploads(string path,string name)
         {
-
-            string returnpath = @"\Asset\SaveAsset\" + DateTime.Now.ToString("MMddyyyy") + @"\"+name+".jpg";
-            string newDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Asset\SaveAsset\" + DateTime.Now.ToString("MMddyyyy");
-            if (!Directory.Exists(newDir))
+            try
             {
-                Directory.CreateDirectory(newDir);
+                string returnpath = @"\Asset\SaveAsset\" + DateTime.Now.ToString("MMddyyyy") + @"\" + name + ".jpg";
+                string newDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Asset\SaveAsset\" + DateTime.Now.ToString("MMddyyyy");
+                if (!Directory.Exists(newDir))
+                {
+                    Directory.CreateDirectory(newDir);
+                }
+                newDir += @"\" + name + ".jpg";
+                File.Copy(path, newDir, true);
+
+                return returnpath;
             }
-            newDir += @"\"+name + ".jpg";
-            File.Copy(path, newDir,true);
-            
-            return returnpath;
+            catch (Exception e)
+            {
+                return path;
+            }
         }
     }
 }

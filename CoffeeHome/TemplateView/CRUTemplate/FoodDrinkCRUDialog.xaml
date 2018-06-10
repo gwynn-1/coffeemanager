@@ -67,8 +67,8 @@
                              Margin="0 18 0 0"
                              materialDesign:ValidationAssist.Suppress="False"
                              materialDesign:ValidationAssist.OnlyShowOnFocus="True"
-                             FontSize="16">
-                    </TextBox>
+                             FontSize="16" Text="{Binding DrinkDessertViewObject.description}">
+                </TextBox>
                 <AdornerDecorator>
                     <TextBox x:Name="txbPrice"
                              materialDesign:HintAssist.Hint="Giá" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
@@ -100,7 +100,7 @@
                                   ItemsSource="{Binding DrinkType}"
                                   DisplayMemberPath="name"
                                   SelectedValuePath="id_type"
-                                  SelectedIndex="0">
+                                  SelectedValue="{Binding DrinkDessertViewObject.id_type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                 </DockPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 18 0 0">
@@ -138,7 +138,7 @@
                     >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding CreateCommand}">
+                        <i:InvokeCommandAction Command="{Binding SubmitCommand}">
                             <i:InvokeCommandAction.CommandParameter>
                                 <MultiBinding Converter="{StaticResource drinkdessertConverter}">
                                     <MultiBinding.Bindings>
@@ -155,11 +155,13 @@
                 </i:Interaction.Triggers>
                 ACCEPT
             </Button>
-            <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
-                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                <Button.CommandParameter>
-                    <system:Boolean>False</system:Boolean>
-                </Button.CommandParameter>
+            <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding CloseDialogCommand}">
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 CANCEL
             </Button>
         </StackPanel>

@@ -12,8 +12,8 @@ namespace CoffeeHome.Model
 
         public List<Bill_Online_Detail> getList()
         {
-            var list = db.Bill_Online_Detail.ToList();
-            return (list as List<Bill_Online_Detail>);
+                var list = db.Bill_Online_Detail.Include("DrinkAndDessert").ToList();
+                return (list as List<Bill_Online_Detail>);
         }
 
         public bool create(Bill_Online_Detail bill_Online_Detail)

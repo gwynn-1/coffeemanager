@@ -80,6 +80,7 @@
     <Compile Include="Converter\BillOnlineConverter.cs" />
     <Compile Include="Converter\BillOnlineDetailConverter.cs" />
     <Compile Include="Converter\CustomerConverter.cs" />
+    <Compile Include="Converter\DialogBillDetailConverter.cs" />
     <Compile Include="Converter\DrinkDessertConverter.cs" />
     <Compile Include="Converter\DrinkTypeConverter.cs" />
     <Compile Include="Converter\ImageSourceConverter.cs" />
@@ -166,6 +167,9 @@
     </Compile>
     <Compile Include="TemplateView\CRUTemplate\TableCRUDialog.xaml.cs">
       <DependentUpon>TableCRUDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateView\DeleteTemplate\DeleteDialog.xaml.cs">
+      <DependentUpon>DeleteDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="TemplateView\ListViewTemplate\BillDetailTemplate.xaml.cs">
       <DependentUpon>BillDetailTemplate.xaml</DependentUpon>
@@ -271,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TemplateView\CRUTemplate\TableCRUDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateView\DeleteTemplate\DeleteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

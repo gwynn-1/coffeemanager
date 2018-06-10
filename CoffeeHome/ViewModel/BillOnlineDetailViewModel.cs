@@ -136,8 +136,8 @@ namespace CoffeeHome.ViewModel
         {
             BillOnlineDetailList = null;
             BillOnlineDetailList = new ObservableCollection<Bill_Online_Detail>(billOnlineDetailModel.getList());
-            billDetailOnlineViewSource.Source = BillOnlineDetailList;
-            billDetailOnlineViewSource.View.Refresh();
+            BillDetailOnlineViewSource.Source = BillOnlineDetailList;
+            BillDetailOnlineViewSource.View.Refresh();
         }
 
         private void priceChanged(object obj)
