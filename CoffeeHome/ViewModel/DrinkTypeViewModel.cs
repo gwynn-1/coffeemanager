@@ -11,6 +11,7 @@ using System.Windows.Input;
 using CoffeeHome.TemplateView.CRUTemplate;
 using System.Windows.Controls;
 using System.Windows.Data;
+using CoffeeHome.TemplateView.DeleteTemplate;
 
 namespace CoffeeHome.ViewModel
 {
@@ -37,6 +38,7 @@ namespace CoffeeHome.ViewModel
         }
 
         private DrinkTypeCRUDialog CruDialog = new DrinkTypeCRUDialog();
+        private DeleteDialog deleteDialog = new DeleteDialog();
 
         private string action;
         public string Action { get => action;
@@ -70,8 +72,11 @@ namespace CoffeeHome.ViewModel
         public ICommand OpenCruDialogCommand { get => openCruDialogCommand; set => openCruDialogCommand = value; }
         private ICommand openCruDialogCommand;
 
-        private ICommand createCommand;
-        public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
+        private ICommand openDeleteDialogCommand;
+        public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
+
+        private ICommand submitCommand;
+        public ICommand SubmitCommand { get => submitCommand; set => submitCommand = value; }
 
         #endregion
 
@@ -81,8 +86,16 @@ namespace CoffeeHome.ViewModel
             drinkTypeViewSource.Source = drinkTypeList;
 
             OpenCruDialogCommand = new RelayCommand<object>(p=>true,OpenCRUDialogEventAsync);
-            CreateCommand = new RelayCommand<Drink_type>(p=>true,Create);
+            OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
+            submitCommand = new RelayCommand<Drink_type>(p => true, submit);
             CruDialog.DataContext = this;
+        }
+
+        private async void openDeleteDialog(object obj)
+        {
+            deleteDialog.DataContext = this;
+            this.Action = obj.ToString();
+            var result = await DialogHost.Show(deleteDialog, "RootDialog");
         }
 
         private void refreshView()
@@ -95,8 +108,33 @@ namespace CoffeeHome.ViewModel
 
         private async void OpenCRUDialogEventAsync(object obj)
         {
-            this.Action = "Thêm";
-            var result = await DialogHost.Show(CruDialog,"RootDialog");
+            DrinkTypeViewObject = null;
+            if (obj == null)
+            {
+                this.Action = "Thêm";
+            }
+            else
+            {
+                this.Action = "Sửa";
+                DrinkTypeViewObject = drinkTypeModel.getDrinkTypeByID((int)obj);
+            }
+            var result = await DialogHost.Show(CruDialog, "RootDialog");
+        }
+
+        private void submit(Drink_type drink_Type)
+        {
+            if (this.Action == "Thêm")
+            {
+                Create(drink_Type);
+            }
+            else if (this.Action == "Sửa")
+            {
+                update(drink_Type);
+            }
+            else
+            {
+                delete();
+            }
         }
 
         private void Create(Drink_type obj)
@@ -108,7 +146,35 @@ namespace CoffeeHome.ViewModel
             }
             else
             {
-                this.BindingMessage(false, "Không thêm được loại món Ăn");
+                this.BindingMessage(false, "Không thêm được loại đồ uống");
+            }
+            DialogHost.CloseDialogCommand.Execute(new object(), null);
+        }
+
+        private void delete()
+        {
+            if (drinkTypeModel.delete(int.Parse(this.Action)))
+            {
+                this.BindingMessage(true, "Đã xóa thành công");
+                refreshView();
+            }
+            else
+            {
+                this.BindingMessage(false, "Không xóa được loại đồ uống");
+            }
+            DialogHost.CloseDialogCommand.Execute(new object(), null);
+        }
+
+        private void update(Drink_type obj)
+        {
+            if (drinkTypeModel.update(obj,DrinkTypeViewObject.id_type))
+            {
+                this.BindingMessage(true, "Đã sửa thành công");
+                refreshView();
+            }
+            else
+            {
+                this.BindingMessage(false, "Không sửa được loại đồ uống");
             }
             DialogHost.CloseDialogCommand.Execute(new object(), null);
         }

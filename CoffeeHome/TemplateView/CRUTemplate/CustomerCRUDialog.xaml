@@ -140,7 +140,7 @@
                     >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding CreateCommand}">
+                        <i:InvokeCommandAction Command="{Binding SubmitCommand}">
                             <i:InvokeCommandAction.CommandParameter>
                                 <MultiBinding Converter="{StaticResource customerConverter}">
                                     <MultiBinding.Bindings>

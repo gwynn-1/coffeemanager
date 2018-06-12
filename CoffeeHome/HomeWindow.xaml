@@ -48,8 +48,7 @@
                         <Grid>
                             <materialDesign:PackIcon Width="40" Height="40" Kind="Account" Background="#FFC3C3C3"/>
                         </Grid>
-                        <TextBlock VerticalAlignment="Center" Margin="15,0,0,0">
-                            UserName
+                        <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="{Binding CurrentUser}">
                         </TextBlock>
                     </StackPanel>
                 </Grid>

@@ -203,6 +203,7 @@
     <Compile Include="Validation\PasswordValidation.cs" />
     <Compile Include="Validation\RequiredValidation.cs" />
     <Compile Include="Validation\UniqueValidation.cs" />
+    <Compile Include="Vendor\GlobalVariable\GlobalVariable.cs" />
     <Compile Include="Vendor\MD5Provider\Source\MD5Provider.cs" />
     <Compile Include="Vendor\PasswordHelper\Source\PasswordHelper.cs" />
     <Compile Include="Vendor\UploadFile\Source\UploadFile.cs" />

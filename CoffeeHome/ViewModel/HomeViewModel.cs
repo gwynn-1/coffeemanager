@@ -7,16 +7,29 @@ using CoffeeHome.TemplateView.ListViewTemplate;
 using CoffeeHome.TemplateView.CRUTemplate;
 using CoffeeHome.TemplateView;
 using System.Collections.ObjectModel;
+using CoffeeHome.Vendor.GlobalVariable;
 
 namespace CoffeeHome.ViewModel
 {
     public class HomeViewModel : BaseViewModel
     {
         public ObservableCollection<ItemField> Items { get; }
+        
 
         public AdminTemplate template = new AdminTemplate();
+
+        private string currentUser;
+        public string CurrentUser { get => currentUser;
+            set
+            {
+                currentUser = value;
+                OnPropertyChanged("currentUser");
+            }
+        }
         public HomeViewModel()
         {
+            this.currentUser = GlobalVariable.currentUser;
+
             this.Items = new ObservableCollection<ItemField>(){
                   new ItemField("Đồ uống",this.template,new FoodDrinkTemplate(),"/Asset/Images/drink-food.png"),
                   new ItemField("Loại đồ uống",this.template,new DrinkTypeTemplate(),"/Asset/Images/drink-type.png"),

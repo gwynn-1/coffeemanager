@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             x:Name="customerTemplate"
              xmlns:local="clr-namespace:CoffeeHome.TemplateView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -73,14 +75,28 @@
                                         Width="50"
                                         Height="20"
                                         FontSize="9"
-                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"></Button>
+                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding ElementName=customerTemplate, Path=DataContext.OpenCruDialogCommand}" CommandParameter="{Binding id_customer}">
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
                                 <Button Content="Xóa" 
                                         Margin="0 4 0 0" 
                                         Padding="0" 
                                         Width="50"
                                         Height="20"
                                         FontSize="9"
-                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"></Button>
+                                        FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding ElementName=customerTemplate, Path=DataContext.OpenDeleteDialogCommand}" CommandParameter="{Binding id_customer}">
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

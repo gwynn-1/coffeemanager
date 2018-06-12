@@ -1,5 +1,6 @@
 ﻿using CoffeeHome.Model;
 using CoffeeHome.TemplateView.CRUTemplate;
+using CoffeeHome.TemplateView.DeleteTemplate;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,8 @@ namespace CoffeeHome.ViewModel
             }
         }
         private CustomerCRUDialog CruDialog = new CustomerCRUDialog();
-        
+        private DeleteDialog deleteDialog = new DeleteDialog();
+
         #endregion
 
         #region Model
@@ -73,6 +75,12 @@ namespace CoffeeHome.ViewModel
 
         private ICommand createCommand;
         public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
+
+        private ICommand openDeleteDialogCommand;
+        public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
+
+        private ICommand submitCommand;
+        public ICommand SubmitCommand { get => submitCommand; set => submitCommand = value; }
         #endregion
         public CustomerViewModel()
         {
@@ -81,7 +89,16 @@ namespace CoffeeHome.ViewModel
             customerViewSource.Source = customerList;
 
             OpenCruDialogCommand = new RelayCommand<object>(p => true, OpenCRUDialogEventAsync);
+            OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
+            submitCommand = new RelayCommand<Customer>(p => true, submit);
             createCommand = new RelayCommand<Customer>(p => true, create);
+        }
+
+        private async void openDeleteDialog(object obj)
+        {
+            deleteDialog.DataContext = this;
+            this.Action = obj.ToString();
+            var result = await DialogHost.Show(deleteDialog, "RootDialog");
         }
 
         private void refreshView()
@@ -90,6 +107,22 @@ namespace CoffeeHome.ViewModel
             customerList = new ObservableCollection<Customer>(customerModel.getList());
             customerViewSource.Source = customerList;
             customerViewSource.View.Refresh();
+        }
+
+        private void submit(Customer customer)
+        {
+            if (this.Action == "Thêm")
+            {
+                create(customer);
+            }
+            else if (this.Action == "Sửa")
+            {
+                update(customer);
+            }
+            else
+            {
+                delete();
+            }
         }
 
         private void create(Customer customer)
@@ -106,9 +139,46 @@ namespace CoffeeHome.ViewModel
             DialogHost.CloseDialogCommand.Execute(new object(), null);
         }
 
+        private void update(Customer obj)
+        {
+            if (customerModel.update(obj, CustomerViewObject.id_customer))
+            {
+                this.BindingMessage(true, "Đã sửa thành công");
+                refreshView();
+            }
+            else
+            {
+                this.BindingMessage(false, "Không sửa được loại món Ăn");
+            }
+            DialogHost.CloseDialogCommand.Execute(new object(), null);
+        }
+
+        private void delete()
+        {
+            if (customerModel.delete(int.Parse(this.Action)))
+            {
+                this.BindingMessage(true, "Đã xóa thành công");
+                refreshView();
+            }
+            else
+            {
+                this.BindingMessage(false, "Không xóa được khách hàng");
+            }
+            DialogHost.CloseDialogCommand.Execute(new object(), null);
+        }
+
         private async void OpenCRUDialogEventAsync(object obj)
         {
-            this.Action = "Thêm";
+            CustomerViewObject = null;
+            if (obj == null)
+            {
+                this.Action = "Thêm";
+            }
+            else
+            {
+                this.Action = "Sửa";
+                CustomerViewObject = customerModel.getCustomerByID((int)obj);
+            }
             var result = await DialogHost.Show(CruDialog, "RootDialog");
         }
     }

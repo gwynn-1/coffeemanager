@@ -1,5 +1,6 @@
 ﻿using CoffeeHome.Converter;
 using CoffeeHome.Model;
+using CoffeeHome.Vendor.GlobalVariable;
 using CoffeeHome.Vendor.MD5Provider.Source;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,7 @@ namespace CoffeeHome.ViewModel
             if (staff.checkStaff(obj.username, obj.password))
             {
                 Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate () {
+                    GlobalVariable.currentUser = obj.username;
                     HomeWindow home = new HomeWindow();
                     Application.Current.MainWindow.Close();
                     home.Show();
