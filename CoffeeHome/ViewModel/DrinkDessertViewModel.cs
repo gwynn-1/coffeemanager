@@ -137,14 +137,16 @@ namespace CoffeeHome.ViewModel
 
         private async void openCRUDialogEventAsync(object obj)
         {
-            DrinkDessertViewObject = null;
+            
             if (obj == null)
             {
                 this.Action = "Thêm";
+                DrinkDessertViewObject = new DrinkAndDessert();
             }
             else
             {
                 this.Action = "Sửa";
+                DrinkDessertViewObject = null;
                 DrinkDessertViewObject = drinkDessertModel.getDrinkByID((int)obj);
             }
             var result = await DialogHost.Show(CruDialog, "RootDialog");

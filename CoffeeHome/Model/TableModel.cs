@@ -31,5 +31,20 @@ namespace CoffeeHome.Model
                 return false;
             }
         }
+
+        public bool delete(int id)
+        {
+            try
+            {
+                var item = db.Tables.Where(cus => cus.id_table == id).SingleOrDefault();
+                db.Tables.Remove(item);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

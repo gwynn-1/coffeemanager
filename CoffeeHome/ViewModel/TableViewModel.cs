@@ -1,5 +1,6 @@
 ﻿using CoffeeHome.Model;
 using CoffeeHome.TemplateView.CRUTemplate;
+using CoffeeHome.TemplateView.DeleteTemplate;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,8 @@ namespace CoffeeHome.ViewModel
             }
         }
         private TableCRUDialog CruDialog = new TableCRUDialog();
-        
+        private DeleteDialog deleteDialog = new DeleteDialog();
+
         #endregion
 
         #region Model
@@ -74,6 +76,12 @@ namespace CoffeeHome.ViewModel
 
         private ICommand createCommand;
         public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
+
+        private ICommand submitCommand;
+        public ICommand SubmitCommand { get => submitCommand; set => submitCommand = value; }
+
+        private ICommand openDeleteDialogCommand;
+        public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
         #endregion
 
         public TableViewModel()
@@ -84,6 +92,31 @@ namespace CoffeeHome.ViewModel
 
             OpenCruDialogCommand = new RelayCommand<object>(p => true, OpenCRUDialogEventAsync);
             createCommand = new RelayCommand<Table>(p => true, create);
+            submitCommand = new RelayCommand<Table>(p => true, submit);
+            OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
+        }
+
+        private async void openDeleteDialog(object obj)
+        {
+            deleteDialog.DataContext = this;
+            this.Action = obj.ToString();
+            var result = await DialogHost.Show(deleteDialog, "RootDialog");
+        }
+
+        private void submit(Table table)
+        {
+            if (this.Action == "Thêm")
+            {
+                create(table);
+            }
+            //else if (this.Action == "Sửa")
+            //{
+            //    update(customer);
+            //}
+            else
+            {
+                delete();
+            }
         }
 
         private void create(Table obj)
@@ -96,6 +129,20 @@ namespace CoffeeHome.ViewModel
             else
             {
                 this.BindingMessage(false, "Không thêm được bàn");
+            }
+            DialogHost.CloseDialogCommand.Execute(new object(), null);
+        }
+
+        private void delete()
+        {
+            if (tableModel.delete(int.Parse(this.Action)))
+            {
+                this.BindingMessage(true, "Đã xóa thành công");
+                refreshView();
+            }
+            else
+            {
+                this.BindingMessage(false, "Không xóa được bàn");
             }
             DialogHost.CloseDialogCommand.Execute(new object(), null);
         }

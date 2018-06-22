@@ -239,16 +239,18 @@ namespace CoffeeHome.ViewModel
 
         private async void OpenCRUDialogEventAsync(List<object> obj)
         {
-            BillDetailViewObject = null;
+            
             if (obj == null)
             {
                 this.Action = "Thêm";
+                BillDetailViewObject = new Bill_details();
                 IsDisableCombobox = true;
             }
             else
             {
                 this.Action = "Sửa";
                 IsDisableCombobox = false;
+                BillDetailViewObject = null;
                 BillDetailViewObject = billDetailModel.getDetailByID((int)obj[0],(int)obj[1]);
                 PriceBinding = BillDetailViewObject.price.ToString();
             }

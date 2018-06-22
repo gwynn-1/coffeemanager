@@ -31,5 +31,51 @@ namespace CoffeeHome.Model
                 return false;
             }
         }
+
+        public Bill_Online_Detail getDetailByID(int id_bill, int id_food)
+        {
+            var result = (from detail in db.Bill_Online_Detail.Include("DrinkAndDessert")
+                          where detail.id_bill == id_bill && detail.id_drink == id_food
+                          select detail).SingleOrDefault();
+            return (Bill_Online_Detail)result;
+        }
+
+        public bool delete(int id_bill, int id_food)
+        {
+            try
+            {
+                var item = db.Bill_Online_Detail.Where(bdt => bdt.id_bill == id_bill && bdt.id_drink == id_food).SingleOrDefault();
+                db.Bill_Online_Detail.Remove(item);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool update(Bill_Online_Detail billdetail, int id_bill, int id_food)
+        {
+            try
+            {
+                billdetail.updated_at = DateTime.Now;
+                (from billdt in db.Bill_Online_Detail
+                 where billdt.id_bill == id_bill && billdt.id_drink == id_food
+                 select billdt)
+                              .ToList()
+                              .ForEach((p) =>
+                              {
+                                  p.quantity = billdetail.quantity;
+                                  p.price = billdetail.price;
+                              });
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

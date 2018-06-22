@@ -73,9 +73,6 @@ namespace CoffeeHome.ViewModel
         public ICommand OpenCruDialogCommand { get => openCruDialogCommand; set => openCruDialogCommand = value; }
         private ICommand openCruDialogCommand;
 
-        private ICommand createCommand;
-        public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
-
         private ICommand openDeleteDialogCommand;
         public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
 
@@ -91,7 +88,6 @@ namespace CoffeeHome.ViewModel
             OpenCruDialogCommand = new RelayCommand<object>(p => true, OpenCRUDialogEventAsync);
             OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
             submitCommand = new RelayCommand<Customer>(p => true, submit);
-            createCommand = new RelayCommand<Customer>(p => true, create);
         }
 
         private async void openDeleteDialog(object obj)
@@ -169,14 +165,16 @@ namespace CoffeeHome.ViewModel
 
         private async void OpenCRUDialogEventAsync(object obj)
         {
-            CustomerViewObject = null;
+            
             if (obj == null)
             {
                 this.Action = "Thêm";
+                CustomerViewObject = new Customer();
             }
             else
             {
                 this.Action = "Sửa";
+                CustomerViewObject = null;
                 CustomerViewObject = customerModel.getCustomerByID((int)obj);
             }
             var result = await DialogHost.Show(CruDialog, "RootDialog");

@@ -108,13 +108,15 @@ namespace CoffeeHome.ViewModel
 
         private async void OpenCRUDialogEventAsync(object obj)
         {
-            DrinkTypeViewObject = null;
+            
             if (obj == null)
             {
                 this.Action = "Thêm";
+                DrinkTypeViewObject = new Drink_type();
             }
             else
             {
+                DrinkTypeViewObject = null;
                 this.Action = "Sửa";
                 DrinkTypeViewObject = drinkTypeModel.getDrinkTypeByID((int)obj);
             }

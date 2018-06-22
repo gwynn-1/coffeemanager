@@ -16,5 +16,5 @@ E:\Code Visual 2013\CoffeeManager\CoffeeHome\App.xaml
 231796293903
 HomeWindow.xaml;MainWindow.xaml;SignupWindow.xaml;TemplateView\AdminTemplate.xaml;TemplateView\CRUTemplate\BillCRUDialog.xaml;TemplateView\CRUTemplate\BillDetailCRUDialog.xaml;TemplateView\CRUTemplate\BillOnlineCRUDialog.xaml;TemplateView\CRUTemplate\BillOnlineDetailCRUDialog.xaml;TemplateView\CRUTemplate\CustomerCRUDialog.xaml;TemplateView\CRUTemplate\DrinkTypeCRUDialog.xaml;TemplateView\CRUTemplate\FoodDrinkCRUDialog.xaml;TemplateView\CRUTemplate\TableCRUDialog.xaml;TemplateView\DeleteTemplate\DeleteDialog.xaml;TemplateView\ListViewTemplate\BillDetailTemplate.xaml;TemplateView\ListViewTemplate\BillOnlineDetailTemplate.xaml;TemplateView\ListViewTemplate\BillOnlineTemplate.xaml;TemplateView\ListViewTemplate\BillTemplate.xaml;TemplateView\ListViewTemplate\CustomerTemplate.xaml;TemplateView\ListViewTemplate\DrinkTypeTemplate.xaml;TemplateView\ListViewTemplate\FoodDrinkTemplate.xaml;TemplateView\ListViewTemplate\TableTemplate.xaml;
 
-True
+False
 

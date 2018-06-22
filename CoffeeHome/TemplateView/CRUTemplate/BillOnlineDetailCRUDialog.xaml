@@ -51,11 +51,12 @@
                                   MinWidth="72"
                                   MaxWidth="415"
                                   FontSize="16"
+                                  IsEditable="{Binding IsDisableCombobox}" IsHitTestVisible="{Binding IsDisableCombobox}" Focusable="{Binding IsDisableCombobox}"
                                   VerticalAlignment="Bottom"
                                   ItemsSource="{Binding BillOnlineList}"
                                   DisplayMemberPath="id_bill_online"
                                   SelectedValuePath="id_bill_online"
-                                  SelectedIndex="0">
+                                  SelectedValue="{Binding BillDetailOnlineViewObject.id_bill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                 </DockPanel>
                 <DockPanel Margin="0 18 0 0">
@@ -69,10 +70,11 @@
                                   MaxWidth="390"
                                   FontSize="16"
                                   VerticalAlignment="Bottom"
+                              IsEditable="{Binding IsDisableCombobox}" IsHitTestVisible="{Binding IsDisableCombobox}" Focusable="{Binding IsDisableCombobox}"
                                   ItemsSource="{Binding DrinkDessertList}"
                                   DisplayMemberPath="name"
                                   SelectedValuePath="id_drink"
-                                  SelectedIndex="0">
+                              SelectedValue="{Binding BillDetailOnlineViewObject.id_drink,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=cbbDrink, Path=SelectedValue}">
@@ -125,7 +127,7 @@
                     >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding CreateCommand}">
+                        <i:InvokeCommandAction Command="{Binding SubmitCommand}">
                             <i:InvokeCommandAction.CommandParameter>
                                 <MultiBinding Converter="{StaticResource billOnlineDetailConverter}">
                                     <MultiBinding.Bindings>

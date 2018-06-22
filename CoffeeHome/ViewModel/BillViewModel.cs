@@ -1,5 +1,6 @@
 ﻿using CoffeeHome.Model;
 using CoffeeHome.TemplateView.CRUTemplate;
+using CoffeeHome.TemplateView.DeleteTemplate;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -58,6 +59,7 @@ namespace CoffeeHome.ViewModel
         }
 
         private BillCRUDialog CruDialog = new BillCRUDialog();
+        private DeleteDialog deleteDialog = new DeleteDialog();
 
         private CollectionViewSource billViewSource = new CollectionViewSource();
         public CollectionViewSource BillViewSource
@@ -67,6 +69,17 @@ namespace CoffeeHome.ViewModel
             {
                 billViewSource = value;
                 OnPropertyChanged("billViewSource");
+            }
+        }
+
+        private bool isDisableCombobox;
+        public bool IsDisableCombobox
+        {
+            get => isDisableCombobox;
+            set
+            {
+                isDisableCombobox = value;
+                OnPropertyChanged("isDisableCombobox");
             }
         }
         #endregion
@@ -93,21 +106,33 @@ namespace CoffeeHome.ViewModel
         public ICommand OpenCruDialogCommand { get => openCruDialogCommand; set => openCruDialogCommand = value; }
         private ICommand openCruDialogCommand;
 
-        private ICommand createCommand;
-        public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
-        
+        private ICommand submitCommand;
+        public ICommand SubmitCommand { get => submitCommand; set => submitCommand = value; }
+
+        private ICommand openDeleteDialogCommand;
+        public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
+
         #endregion
 
         public BillViewModel()
         {
             CruDialog.DataContext = this;
+            IsDisableCombobox = true;
             billList = new ObservableCollection<Bill>(billModel.getList());
             customerList = new ObservableCollection<Customer>(customerModel.getList());
             tableList = new ObservableCollection<Table>(tableModel.getList());
             billViewSource.Source = billList;
 
             OpenCruDialogCommand = new RelayCommand<object>(p => true, OpenCRUDialogEventAsync);
-            createCommand = new RelayCommand<Bill>(p => true, create);
+            submitCommand = new RelayCommand<Bill>(p => true, submit);
+            OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
+        }
+
+        private async void openDeleteDialog(object obj)
+        {
+            deleteDialog.DataContext = this;
+            this.Action = obj.ToString();
+            var result = await DialogHost.Show(deleteDialog, "RootDialog");
         }
 
         private void refreshView()
@@ -116,6 +141,22 @@ namespace CoffeeHome.ViewModel
             billList = new ObservableCollection<Bill>(billModel.getList());
             billViewSource.Source = BillList;
             billViewSource.View.Refresh();
+        }
+
+        private void submit(Bill bill)
+        {
+            if (this.Action == "Thêm")
+            {
+                create(bill);
+            }
+            else if (this.Action == "Sửa")
+            {
+                update(bill);
+            }
+            else
+            {
+                delete();
+            }
         }
 
         private void create(Bill obj)
@@ -132,9 +173,50 @@ namespace CoffeeHome.ViewModel
             DialogHost.CloseDialogCommand.Execute(new object(), null);
         }
 
+        private void update(Bill obj)
+        {
+            if (billModel.update(obj, BillViewObject.id_bill))
+            {
+                this.BindingMessage(true, "Đã sửa thành công");
+                refreshView();
+            }
+            else
+            {
+                this.BindingMessage(false, "Không sửa được đồ uống");
+            }
+            DialogHost.CloseDialogCommand.Execute(new object(), null);
+        }
+
+        private void delete()
+        {
+            if (billModel.delete(int.Parse(this.Action)))
+            {
+                this.BindingMessage(true, "Đã xóa thành công");
+                refreshView();
+            }
+            else
+            {
+                this.BindingMessage(false, "Không xóa được đồ uống");
+            }
+            DialogHost.CloseDialogCommand.Execute(new object(), null);
+        }
+
         private async void OpenCRUDialogEventAsync(object obj)
         {
-            this.Action = "Thêm";
+            
+            if (obj == null)
+            {
+                this.Action = "Thêm";
+                IsDisableCombobox = true;
+                BillViewObject = new Bill();
+            }
+            else
+            {
+                this.Action = "Sửa";
+                IsDisableCombobox = false;
+                BillViewObject = null;
+                BillViewObject = billModel.getBillByID((int)obj);
+            }
             var result = await DialogHost.Show(CruDialog, "RootDialog");
         }
     }
