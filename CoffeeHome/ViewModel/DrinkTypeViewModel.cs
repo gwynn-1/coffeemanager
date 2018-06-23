@@ -48,6 +48,27 @@ namespace CoffeeHome.ViewModel
                 OnPropertyChanged("action");
             }
         }
+
+        private List<string> arr_field_filter=new List<string>(new string[] { "ID","Tên Loại" });
+        public List<string> Arr_field_filter {
+            get => arr_field_filter;
+            set
+            {
+                arr_field_filter = value;
+                OnPropertyChanged("arr_field_filter");
+            }
+        }
+
+        private string[] textFilter;
+        public string[] TextFilter {
+            get => textFilter;
+            set
+            {
+                textFilter = value;
+                OnPropertyChanged("textFilter");
+            }
+        }
+
         #endregion
 
         #region ViewObject
@@ -78,16 +99,20 @@ namespace CoffeeHome.ViewModel
         private ICommand submitCommand;
         public ICommand SubmitCommand { get => submitCommand; set => submitCommand = value; }
 
+        private ICommand submitFilterCommand;
+        public ICommand SubmitFilterCommand { get => submitFilterCommand; set => submitFilterCommand = value; }
         #endregion
 
         public DrinkTypeViewModel()
         {
             drinkTypeList = new ObservableCollection<Drink_type>(drinkTypeModel.getList());
             drinkTypeViewSource.Source = drinkTypeList;
+            drinkTypeViewSource.View.Filter = Filter;
 
             OpenCruDialogCommand = new RelayCommand<object>(p=>true,OpenCRUDialogEventAsync);
             OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
             submitCommand = new RelayCommand<Drink_type>(p => true, submit);
+            submitFilterCommand = new RelayCommand<List<object>>(p=>true,submitFilter);
             CruDialog.DataContext = this;
         }
 
@@ -103,6 +128,36 @@ namespace CoffeeHome.ViewModel
             drinkTypeList = null;
             drinkTypeList = new ObservableCollection<Drink_type>(drinkTypeModel.getList());
             drinkTypeViewSource.Source = drinkTypeList;
+            drinkTypeViewSource.View.Refresh();
+        }
+
+        private bool Filter(object item)
+        {
+            if (TextFilter != null)
+            {
+                if (String.IsNullOrEmpty(TextFilter[0]))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (TextFilter[1] == "Tên Loại")
+                        return ((item as Drink_type).name.IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else if (TextFilter[1] == "ID")
+                        return ((item as Drink_type).id_type.ToString().IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else
+                        return true;
+                }
+            }
+            else
+                return true;
+        }
+
+        private void submitFilter(List<object> filter)
+        {
+            TextFilter = filter.Where(x => x != null)
+                       .Select(x => x.ToString())
+                       .ToArray(); 
             drinkTypeViewSource.View.Refresh();
         }
 

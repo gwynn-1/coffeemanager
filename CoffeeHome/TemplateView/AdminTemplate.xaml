@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:converter="clr-namespace:CoffeeHome.Converter"
+             xmlns:iex="clr-namespace:Microsoft.Expression.Interactivity.Input;assembly=Microsoft.Expression.Interactions"
              xmlns:local="clr-namespace:CoffeeHome.TemplateView"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1010">
@@ -22,6 +24,7 @@
                     <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary700}"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <converter:DialogBillDetailConverter x:Key="FilterConverter"></converter:DialogBillDetailConverter>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Background="White">
@@ -70,13 +73,14 @@
                                Margin="0,0,10,0"
                                Foreground="#FF555555"
                                >Field :</TextBlock>
-                        <ComboBox materialDesign:HintAssist.Hint="Virtualisation"
+                        <ComboBox materialDesign:HintAssist.Hint="Chọn"
+                                  x:Name="cbbFilter"
                                   MinWidth="72"
                                   Margin="0 0 10 0"
                                   VerticalAlignment="Bottom"
-                                  ItemsSource="{Binding LongListToTestComboVirtualization}"
-                                  SelectedValue="{Binding SelectedValueOne}">
-                            <ComboBoxItem>
+                                  ItemsSource="{Binding DatatableTemplate.DataContext.Arr_field_filter}"
+                                  SelectedValue="ID">
+                            <!--<ComboBoxItem>
                                 Chuối
                             </ComboBoxItem>
                             <ComboBoxItem>
@@ -84,14 +88,30 @@
                             </ComboBoxItem>
                             <ComboBoxItem>
                                 Xoài
-                            </ComboBoxItem>
+                            </ComboBoxItem>-->
                         </ComboBox>
                         <TextBox
+                            x:Name="txtFilter"
                          FontSize="14"
                          FontFamily="/CoffeeHome;component/Asset/CoffeeHomeFont/#Roboto"
                          materialDesign:HintAssist.Hint="Tìm kiếm"
                          Width="200"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <i:Interaction.Triggers>
+                                <iex:KeyTrigger Key="Enter">
+                                    <i:InvokeCommandAction Command="{Binding DatatableTemplate.DataContext.SubmitFilterCommand}">
+                                        <i:InvokeCommandAction.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource FilterConverter}">
+                                                <MultiBinding.Bindings>
+                                                    <Binding ElementName="txtFilter" Path="Text"/>
+                                                    <Binding ElementName="cbbFilter" Path="SelectedValue"/>
+                                                </MultiBinding.Bindings>
+                                            </MultiBinding>
+                                        </i:InvokeCommandAction.CommandParameter>
+                                    </i:InvokeCommandAction>
+                                </iex:KeyTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </StackPanel>
                 </DockPanel>
                 
