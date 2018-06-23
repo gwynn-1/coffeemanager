@@ -74,8 +74,8 @@ namespace CoffeeHome.ViewModel
         public ICommand OpenCruDialogCommand { get => openCruDialogCommand; set => openCruDialogCommand = value; }
         private ICommand openCruDialogCommand;
 
-        private ICommand createCommand;
-        public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
+        private ICommand changeStatusCommand;
+        public ICommand ChangeStatusCommand { get => changeStatusCommand; set => changeStatusCommand = value; }
 
         private ICommand submitCommand;
         public ICommand SubmitCommand { get => submitCommand; set => submitCommand = value; }
@@ -91,7 +91,7 @@ namespace CoffeeHome.ViewModel
             tableViewSource.Source = tableList;
 
             OpenCruDialogCommand = new RelayCommand<object>(p => true, OpenCRUDialogEventAsync);
-            createCommand = new RelayCommand<Table>(p => true, create);
+            changeStatusCommand = new RelayCommand<List<object>>(p => true, changeStatus);
             submitCommand = new RelayCommand<Table>(p => true, submit);
             OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
         }
@@ -116,6 +116,20 @@ namespace CoffeeHome.ViewModel
             else
             {
                 delete();
+            }
+        }
+
+        private void changeStatus(List<object> obj)
+        {
+            byte status = (byte)(((bool)obj[0] == true) ? 1 : 0);
+            if (tableModel.changeStatus(status,(int)obj[1]))
+            {
+                this.BindingMessage(true, "Đã đổi trạng thái");
+                refreshView();
+            }
+            else
+            {
+                this.BindingMessage(false, "Không đổi được trạng thái");
             }
         }
 

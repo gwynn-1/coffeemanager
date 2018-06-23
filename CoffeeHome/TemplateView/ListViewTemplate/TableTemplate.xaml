@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:converter="clr-namespace:CoffeeHome.Converter"
              xmlns:local="clr-namespace:CoffeeHome.TemplateView"
              x:Name="tableTemplate"
              mc:Ignorable="d" 
@@ -23,6 +24,14 @@
                     <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary700}"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="CustomToggleButton" BasedOn="{StaticResource MaterialDesignSwitchDarkToggleButton}" TargetType="{x:Type ToggleButton}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding status}" Value="1">
+                        <Setter Property="IsChecked" Value="True"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <converter:DialogBillDetailConverter x:Key="StatusConverter"></converter:DialogBillDetailConverter>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -43,9 +52,36 @@
                 <materialDesign:MaterialDataGridTextColumn Binding="{Binding name}"
                                                               Header="Tên"
                                                               EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding status}"
+                <!--<materialDesign:MaterialDataGridTextColumn Binding="{Binding status}"
                                                               Header="Trạng thái"
-                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                                                              EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />-->
+                <DataGridTemplateColumn Header="Trạng thái" Width="100"
+                                        IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ToggleButton x:Name="StatusToggle"
+                                  Style="{DynamicResource CustomToggleButton}"
+                                  ToolTip="MaterialDesignSwitchDarkToggleButton"
+                                  HorizontalAlignment="Left"
+                                  Margin="0 0 20 0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding ElementName=tableTemplate, Path=DataContext.ChangeStatusCommand}">
+                                            <i:InvokeCommandAction.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource StatusConverter}">
+                                                    <MultiBinding.Bindings>
+                                                        <Binding ElementName="StatusToggle" Path="IsChecked"/>
+                                                        <Binding Path="id_table"/>
+                                                    </MultiBinding.Bindings>
+                                                </MultiBinding>
+                                            </i:InvokeCommandAction.CommandParameter>
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ToggleButton>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
                 <materialDesign:MaterialDataGridTextColumn Binding="{Binding updated_at}"
                                                               Header="Ngày Sửa"

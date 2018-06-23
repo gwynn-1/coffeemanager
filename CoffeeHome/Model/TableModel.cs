@@ -46,5 +46,26 @@ namespace CoffeeHome.Model
                 return false;
             }
         }
+
+        public bool changeStatus(byte status,int id)
+        {
+            try
+            {
+                (from tab in db.Tables
+                 where tab.id_table == id
+                 select tab)
+                              .ToList()
+                              .ForEach((p) =>
+                              {
+                                  p.status = status;
+                              });
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }
