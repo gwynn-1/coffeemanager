@@ -56,7 +56,7 @@
                                   IsEditable="{Binding IsDisableCombobox}" IsHitTestVisible="{Binding IsDisableCombobox}" Focusable="{Binding IsDisableCombobox}"
                                   DisplayMemberPath="name"
                                   SelectedValuePath="id_customer"
-                                  SelectedValue="{Binding BillViewObject.id_customer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                  SelectedValue="{Binding BillViewObject.id_customer,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                 </DockPanel>
                 <DockPanel Margin="0 18 0 0">
@@ -74,7 +74,7 @@
                               IsEditable="{Binding IsDisableCombobox}" IsHitTestVisible="{Binding IsDisableCombobox}" Focusable="{Binding IsDisableCombobox}"
                                   DisplayMemberPath="name"
                                   SelectedValuePath="id_table"
-                                  SelectedValue="{Binding BillViewObject.id_table,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                  SelectedValue="{Binding BillViewObject.id_table,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                 </DockPanel>
                 <AdornerDecorator>
@@ -86,7 +86,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="BillViewObject.total_price" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
                                     <validation:NumericValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>

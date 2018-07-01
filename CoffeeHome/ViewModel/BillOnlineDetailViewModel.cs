@@ -99,6 +99,28 @@ namespace CoffeeHome.ViewModel
         }
 
         private int DrinkIdBinding;
+
+        private List<string> arr_field_filter = new List<string>(new string[] { "ID Hóa Đơn", "Tên Món Ăn" });
+        public List<string> Arr_field_filter
+        {
+            get => arr_field_filter;
+            set
+            {
+                arr_field_filter = value;
+                OnPropertyChanged("arr_field_filter");
+            }
+        }
+
+        private string[] textFilter;
+        public string[] TextFilter
+        {
+            get => textFilter;
+            set
+            {
+                textFilter = value;
+                OnPropertyChanged("textFilter");
+            }
+        }
         #endregion
 
         #region ViewObject
@@ -137,6 +159,9 @@ namespace CoffeeHome.ViewModel
 
         private ICommand openDeleteDialogCommand;
         public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
+
+        private ICommand submitFilterCommand;
+        public ICommand SubmitFilterCommand { get => submitFilterCommand; set => submitFilterCommand = value; }
         #endregion
 
         public BillOnlineDetailViewModel()
@@ -147,6 +172,7 @@ namespace CoffeeHome.ViewModel
             billOnlineList = new ObservableCollection<Bill_Online>(billOnlineModel.getList());
             drinkDessertList = new ObservableCollection<DrinkAndDessert>(drinkDessertModel.getList());
             BillDetailOnlineViewSource.Source = billOnlineDetaillList;
+            BillDetailOnlineViewSource.View.Filter = Filter;
 
             OpenCruDialogCommand = new RelayCommand<List<object>>(p => true, OpenCRUDialogEventAsync);
             //createCommand = new RelayCommand<Bill_Online_Detail>(p => true, create);
@@ -154,6 +180,7 @@ namespace CoffeeHome.ViewModel
             selectionChangedCommand = new RelayCommand<object>(p => true, DrinkChanged);
             priceChangedCommand = new RelayCommand<object>(p => true, priceChanged);
             OpenDeleteDialogCommand = new RelayCommand<List<object>>(p => true, openDeleteDialog);
+            submitFilterCommand = new RelayCommand<List<object>>(p => true, submitFilter);
         }
 
         private void refreshView()
@@ -161,6 +188,36 @@ namespace CoffeeHome.ViewModel
             BillOnlineDetailList = null;
             BillOnlineDetailList = new ObservableCollection<Bill_Online_Detail>(billOnlineDetailModel.getList());
             BillDetailOnlineViewSource.Source = BillOnlineDetailList;
+            BillDetailOnlineViewSource.View.Refresh();
+        }
+
+        private bool Filter(object item)
+        {
+            if (TextFilter != null)
+            {
+                if (String.IsNullOrEmpty(TextFilter[0]))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (TextFilter[1] == "Tên Món Ăn")
+                        return ((item as Bill_Online_Detail).DrinkAndDessert.name.IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else if (TextFilter[1] == "ID Hóa Đơn")
+                        return ((item as Bill_Online_Detail).Bill_Online.id_bill_online.ToString().IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else
+                        return true;
+                }
+            }
+            else
+                return true;
+        }
+
+        private void submitFilter(List<object> filter)
+        {
+            TextFilter = filter.Where(x => x != null)
+                       .Select(x => x.ToString())
+                       .ToArray();
             BillDetailOnlineViewSource.View.Refresh();
         }
 

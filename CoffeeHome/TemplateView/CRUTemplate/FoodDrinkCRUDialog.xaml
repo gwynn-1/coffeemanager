@@ -53,7 +53,7 @@
                              materialDesign:ValidationAssist.OnlyShowOnFocus="True"
                              FontSize="16">
                         <TextBox.Text>
-                            <Binding Path="DrinkDessertViewObject.name" UpdateSourceTrigger="PropertyChanged"
+                            <Binding Path="DrinkDessertViewObject.name" UpdateSourceTrigger="PropertyChanged" Mode="OneWay"
                              ValidatesOnDataErrors="True">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tên" ValidatesOnTargetUpdated="True"/>
@@ -67,7 +67,7 @@
                              Margin="0 18 0 0"
                              materialDesign:ValidationAssist.Suppress="False"
                              materialDesign:ValidationAssist.OnlyShowOnFocus="True"
-                             FontSize="16" Text="{Binding DrinkDessertViewObject.description}">
+                             FontSize="16" Text="{Binding DrinkDessertViewObject.description, Mode=OneWay}">
                 </TextBox>
                 <AdornerDecorator>
                     <TextBox x:Name="txbPrice"
@@ -78,7 +78,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="DrinkDessertViewObject.price" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Giá" ValidatesOnTargetUpdated="True"/>
                                     <validation:NumericValidation PropertyName="Giá" ValidatesOnTargetUpdated="True"/>
@@ -100,7 +100,7 @@
                                   ItemsSource="{Binding DrinkType}"
                                   DisplayMemberPath="name"
                                   SelectedValuePath="id_type"
-                                  SelectedValue="{Binding DrinkDessertViewObject.id_type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                  SelectedValue="{Binding DrinkDessertViewObject.id_type,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                 </DockPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 18 0 0">
@@ -118,7 +118,7 @@
                                  Width="393" IsReadOnly="True">
                             <TextBox.Text>
                                 <Binding Path="DrinkDessertViewObject.image" UpdateSourceTrigger="PropertyChanged"
-                                 ValidatesOnDataErrors="True">
+                                 ValidatesOnDataErrors="True" Mode="OneWay">
                                     <Binding.ValidationRules>
                                         <validation:ImageValidation PropertyName="Hình ảnh" ValidatesOnTargetUpdated="True"/>
                                     </Binding.ValidationRules>

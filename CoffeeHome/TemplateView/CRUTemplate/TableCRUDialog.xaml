@@ -50,7 +50,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="TableViewObject.name" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tên" ValidatesOnTargetUpdated="True"/>
                                 </Binding.ValidationRules>

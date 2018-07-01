@@ -82,6 +82,28 @@ namespace CoffeeHome.ViewModel
                 OnPropertyChanged("isDisableCombobox");
             }
         }
+
+        private List<string> arr_field_filter = new List<string>(new string[] { "ID Bàn", "Tên Khách Hàng" });
+        public List<string> Arr_field_filter
+        {
+            get => arr_field_filter;
+            set
+            {
+                arr_field_filter = value;
+                OnPropertyChanged("arr_field_filter");
+            }
+        }
+
+        private string[] textFilter;
+        public string[] TextFilter
+        {
+            get => textFilter;
+            set
+            {
+                textFilter = value;
+                OnPropertyChanged("textFilter");
+            }
+        }
         #endregion
 
         #region ViewObject
@@ -112,6 +134,9 @@ namespace CoffeeHome.ViewModel
         private ICommand openDeleteDialogCommand;
         public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
 
+        private ICommand submitFilterCommand;
+        public ICommand SubmitFilterCommand { get => submitFilterCommand; set => submitFilterCommand = value; }
+
         #endregion
 
         public BillViewModel()
@@ -122,10 +147,12 @@ namespace CoffeeHome.ViewModel
             customerList = new ObservableCollection<Customer>(customerModel.getList());
             tableList = new ObservableCollection<Table>(tableModel.getList());
             billViewSource.Source = billList;
+            billViewSource.View.Filter = Filter;
 
             OpenCruDialogCommand = new RelayCommand<object>(p => true, OpenCRUDialogEventAsync);
             submitCommand = new RelayCommand<Bill>(p => true, submit);
             OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
+            submitFilterCommand = new RelayCommand<List<object>>(p => true, submitFilter);
         }
 
         private async void openDeleteDialog(object obj)
@@ -140,6 +167,36 @@ namespace CoffeeHome.ViewModel
             billList = null;
             billList = new ObservableCollection<Bill>(billModel.getList());
             billViewSource.Source = BillList;
+            billViewSource.View.Refresh();
+        }
+
+        private bool Filter(object item)
+        {
+            if (TextFilter != null)
+            {
+                if (String.IsNullOrEmpty(TextFilter[0]))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (TextFilter[1] == "Tên Khách Hàng")
+                        return ((item as Bill).Customer.name.IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else if (TextFilter[1] == "ID Bàn")
+                        return ((item as Bill).Table.id_table.ToString().IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else
+                        return true;
+                }
+            }
+            else
+                return true;
+        }
+
+        private void submitFilter(List<object> filter)
+        {
+            TextFilter = filter.Where(x => x != null)
+                       .Select(x => x.ToString())
+                       .ToArray();
             billViewSource.View.Refresh();
         }
 

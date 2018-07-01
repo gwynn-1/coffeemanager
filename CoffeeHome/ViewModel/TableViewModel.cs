@@ -52,6 +52,28 @@ namespace CoffeeHome.ViewModel
         private TableCRUDialog CruDialog = new TableCRUDialog();
         private DeleteDialog deleteDialog = new DeleteDialog();
 
+        private List<string> arr_field_filter = new List<string>(new string[] { "ID", "Tên" });
+        public List<string> Arr_field_filter
+        {
+            get => arr_field_filter;
+            set
+            {
+                arr_field_filter = value;
+                OnPropertyChanged("arr_field_filter");
+            }
+        }
+
+        private string[] textFilter;
+        public string[] TextFilter
+        {
+            get => textFilter;
+            set
+            {
+                textFilter = value;
+                OnPropertyChanged("textFilter");
+            }
+        }
+
         #endregion
 
         #region Model
@@ -82,6 +104,9 @@ namespace CoffeeHome.ViewModel
 
         private ICommand openDeleteDialogCommand;
         public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
+
+        private ICommand submitFilterCommand;
+        public ICommand SubmitFilterCommand { get => submitFilterCommand; set => submitFilterCommand = value; }
         #endregion
 
         public TableViewModel()
@@ -89,11 +114,13 @@ namespace CoffeeHome.ViewModel
             CruDialog.DataContext = this;
             tableList = new ObservableCollection<Table>(tableModel.getList());
             tableViewSource.Source = tableList;
+            tableViewSource.View.Filter = Filter;
 
             OpenCruDialogCommand = new RelayCommand<object>(p => true, OpenCRUDialogEventAsync);
             changeStatusCommand = new RelayCommand<List<object>>(p => true, changeStatus);
             submitCommand = new RelayCommand<Table>(p => true, submit);
             OpenDeleteDialogCommand = new RelayCommand<object>(p => true, openDeleteDialog);
+            submitFilterCommand = new RelayCommand<List<object>>(p => true, submitFilter);
         }
 
         private async void openDeleteDialog(object obj)
@@ -101,6 +128,36 @@ namespace CoffeeHome.ViewModel
             deleteDialog.DataContext = this;
             this.Action = obj.ToString();
             var result = await DialogHost.Show(deleteDialog, "RootDialog");
+        }
+
+        private bool Filter(object item)
+        {
+            if (TextFilter != null)
+            {
+                if (String.IsNullOrEmpty(TextFilter[0]))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (TextFilter[1] == "Tên")
+                        return ((item as Table).name.IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else if (TextFilter[1] == "ID")
+                        return ((item as Table).id_table.ToString().IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else
+                        return true;
+                }
+            }
+            else
+                return true;
+        }
+
+        private void submitFilter(List<object> filter)
+        {
+            TextFilter = filter.Where(x => x != null)
+                       .Select(x => x.ToString())
+                       .ToArray();
+            tableViewSource.View.Refresh();
         }
 
         private void submit(Table table)

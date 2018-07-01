@@ -53,7 +53,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="BillOnlineViewObject.name_customer" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tên khách hàng" ValidatesOnTargetUpdated="True"/>
                                 </Binding.ValidationRules>
@@ -70,7 +70,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="BillOnlineViewObject.address" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Địa chỉ" ValidatesOnTargetUpdated="True"/>
                                 </Binding.ValidationRules>
@@ -87,7 +87,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="BillOnlineViewObject.sdt" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
                                     <validation:NumericValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
@@ -105,7 +105,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="BillOnlineViewObject.total_price" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
                                     <validation:NumericValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>

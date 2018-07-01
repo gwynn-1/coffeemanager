@@ -56,7 +56,7 @@
                                   ItemsSource="{Binding BillOnlineList}"
                                   DisplayMemberPath="id_bill_online"
                                   SelectedValuePath="id_bill_online"
-                                  SelectedValue="{Binding BillDetailOnlineViewObject.id_bill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                  SelectedValue="{Binding BillDetailOnlineViewObject.id_bill,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                 </DockPanel>
                 <DockPanel Margin="0 18 0 0">
@@ -74,7 +74,7 @@
                                   ItemsSource="{Binding DrinkDessertList}"
                                   DisplayMemberPath="name"
                                   SelectedValuePath="id_drink"
-                              SelectedValue="{Binding BillDetailOnlineViewObject.id_drink,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                              SelectedValue="{Binding BillDetailOnlineViewObject.id_drink,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=cbbDrink, Path=SelectedValue}">
@@ -92,7 +92,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="BillDetailOnlineViewObject.quantity" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
                                     <validation:NumericValidation PropertyName="Tổng tiền" ValidatesOnTargetUpdated="True"/>
@@ -114,7 +114,7 @@
                              materialDesign:ValidationAssist.Suppress="False"
                              materialDesign:ValidationAssist.OnlyShowOnFocus="True"
                              IsEnabled="False"
-                             Text="{Binding PriceBinding,Mode=TwoWay}"
+                             Text="{Binding PriceBinding,Mode=OneWay}"
                              FontSize="16">
                     </TextBox>
                 </AdornerDecorator>

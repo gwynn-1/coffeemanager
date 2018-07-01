@@ -54,7 +54,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="CustomerViewObject.name" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Tên" ValidatesOnTargetUpdated="True"/>
                                 </Binding.ValidationRules>
@@ -71,7 +71,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="CustomerViewObject.email" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="Email" ValidatesOnTargetUpdated="True"/>
                                     <validation:EmailValidation PropertyName="Email" ValidatesOnTargetUpdated="True"/>
@@ -89,7 +89,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="CustomerViewObject.cmnd" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:RequiredValidation PropertyName="CMND" ValidatesOnTargetUpdated="True"/>
                                 </Binding.ValidationRules>
@@ -106,7 +106,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="CustomerViewObject.sdt" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:NumericValidation PropertyName="SDT" ValidatesOnTargetUpdated="True"/>
                                 </Binding.ValidationRules>
@@ -123,7 +123,7 @@
                              FontSize="16">
                         <TextBox.Text>
                             <Binding Path="CustomerViewObject.points" UpdateSourceTrigger="PropertyChanged"
-                             ValidatesOnDataErrors="True">
+                             ValidatesOnDataErrors="True" Mode="OneWay">
                                 <Binding.ValidationRules>
                                     <validation:NumericValidation PropertyName="Điểm khách hàng" ValidatesOnTargetUpdated="True"/>
                                 </Binding.ValidationRules>

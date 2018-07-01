@@ -65,7 +65,29 @@ namespace CoffeeHome.ViewModel
                 OnPropertyChanged("drinkDessertViewSource");
             }
         }
-        
+
+        private List<string> arr_field_filter = new List<string>(new string[] { "ID", "Tên Món Ăn" });
+        public List<string> Arr_field_filter
+        {
+            get => arr_field_filter;
+            set
+            {
+                arr_field_filter = value;
+                OnPropertyChanged("arr_field_filter");
+            }
+        }
+
+        private string[] textFilter;
+        public string[] TextFilter
+        {
+            get => textFilter;
+            set
+            {
+                textFilter = value;
+                OnPropertyChanged("textFilter");
+            }
+        }
+
         #endregion
 
         #region Model
@@ -97,6 +119,9 @@ namespace CoffeeHome.ViewModel
 
         private ICommand openDeleteDialogCommand;
         public ICommand OpenDeleteDialogCommand { get => openDeleteDialogCommand; set => openDeleteDialogCommand = value; }
+
+        private ICommand submitFilterCommand;
+        public ICommand SubmitFilterCommand { get => submitFilterCommand; set => submitFilterCommand = value; }
         #endregion
 
         public DrinkDessertViewModel()
@@ -105,11 +130,14 @@ namespace CoffeeHome.ViewModel
             DrinkDessertList = new ObservableCollection<DrinkAndDessert>(drinkDessertModel.getList());
             DrinkType = new ObservableCollection<Drink_type>( drinkTypeModel.getList());
             drinkDessertViewSource.Source = drinkDessertList;
+            drinkDessertViewSource.View.Filter = Filter;
 
             OpenCruDialogCommand = new RelayCommand<object>(p => true, openCRUDialogEventAsync);
             submitCommand = new RelayCommand<DrinkAndDessert>(p=>true, submit);
             closeDialogCommand = new RelayCommand<object>(p=>true,closeDialog);
             OpenDeleteDialogCommand = new RelayCommand<object>(p => true,openDeleteDialog);
+
+            submitFilterCommand = new RelayCommand<List<object>>(p => true, submitFilter);
             pathProject = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         }
 
@@ -133,6 +161,36 @@ namespace CoffeeHome.ViewModel
             drinkDessertList = new ObservableCollection<DrinkAndDessert>(drinkDessertModel.getList());
             drinkDessertViewSource.Source = drinkDessertList;
             drinkDessertViewSource.View.Refresh();
+        }
+
+        private bool Filter(object item)
+        {
+            if (TextFilter != null)
+            {
+                if (String.IsNullOrEmpty(TextFilter[0]))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (TextFilter[1] == "Tên Món Ăn")
+                        return ((item as DrinkAndDessert).name.IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else if (TextFilter[1] == "ID")
+                        return ((item as DrinkAndDessert).id_drink.ToString().IndexOf(TextFilter[0], StringComparison.OrdinalIgnoreCase) >= 0);
+                    else
+                        return true;
+                }
+            }
+            else
+                return true;
+        }
+
+        private void submitFilter(List<object> filter)
+        {
+            TextFilter = filter.Where(x => x != null)
+                       .Select(x => x.ToString())
+                       .ToArray();
+           drinkDessertViewSource.View.Refresh();
         }
 
         private async void openCRUDialogEventAsync(object obj)
